@@ -1,10 +1,15 @@
 import "../Css-Code/HomePageCSS.css"
+import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
+import HomepageSlideImages from "./HomepageSlideImages";
 
 function HomePage (){
     return (
         <div>
+            <HomePageNavbar/>
             <div>
-                <h1>Hey</h1>
+
+                <HomepageSlideImages/>
+                
             </div>
         </div>
     )
