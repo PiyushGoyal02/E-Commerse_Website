@@ -4,19 +4,20 @@
 	box-sizing: border-box;
 }
 
-body {
-	margin: 0;
-	padding-top: 150px; 
+.main-wrapper {
+	padding-top: 150px;
 	font-family: 'Montserrat', sans-serif;
 	background-color: #f4f4f4;
+	min-height: 100vh;
 }
 
-h1 {
+.heading {
 	font-weight: bold;
 	margin: 0;
+	font-size: 24px;
 }
 
-p {
+.text {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -24,18 +25,20 @@ p {
 	margin: 20px 0 30px;
 }
 
-span {
+.small-text {
 	font-size: 12px;
+	margin-bottom: 10px;
 }
 
-a {
+.forgot-link {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
 	margin: 15px 0;
+	cursor: pointer;
 }
 
-button {
+.btn {
 	border-radius: 20px;
 	border: 1px solid #1E90FF;
 	background-color: #1E90FF;
@@ -47,24 +50,30 @@ button {
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 	cursor: pointer;
+	text-align: center;
+	margin-top: 10px;
 }
 
-button:hover {
+.btn:hover {
 	background-color: #0b67c2;
 	border-color: #0b67c2;
 }
 
-button:active {
+.btn:active {
 	transform: scale(0.95);
 }
 
-button:focus {
-	outline: none;
-}
-
-button.ghost {
+.btn.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
+}
+
+.input-field {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
 }
 
 form {
@@ -78,19 +87,11 @@ form {
 	text-align: center;
 }
 
-input {
-	background-color: #eee;
-	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
-	width: 100%;
-}
-
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-				0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+		0 10px 10px rgba(0, 0, 0, 0.22);
 	position: relative;
 	overflow: hidden;
 	width: 768px;
@@ -135,6 +136,7 @@ input {
 		opacity: 0;
 		z-index: 1;
 	}
+
 	50%, 100% {
 		opacity: 1;
 		z-index: 5;
@@ -208,15 +210,17 @@ input {
 
 .social-container {
 	margin: 20px 0;
+	display: flex;
+	gap: 10px;
 }
 
-.social-container a {
+.social {
 	border: 1px solid #DDDDDD;
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 5px;
 	height: 40px;
 	width: 40px;
+	cursor: pointer;
 }
