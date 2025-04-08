@@ -1,12 +1,12 @@
 const UserModel = require("../Model/UserLoginSignUp")
 const JWT = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
+require("dotenv").config()
 
 // SignUp section
 exports.Signup = async (req, res) => {
     
     try {
-
         // fetch data from frontend
         const {name, surname, email, password} = req.body
 

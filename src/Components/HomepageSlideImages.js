@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import HomepageSliderImage1 from "../Assets/HomepageSliderImage1.webp";
-import HomepageSliderImage2 from "../Assets/HomepageSliderImage2.png";
+import HomepageSliderImage1 from "../Assets/HomepageSliderImage1.jpg";
+import HomepageSliderImage2 from "../Assets/HomepageSliderImage2.jpg";
 import HomepageSliderImage3 from "../Assets/HomepageSliderImage3.jpg";
 import "../Css-Code/HomepageSlideImagesCSS.css";
 
@@ -31,11 +31,13 @@ function HomepageSlideImages() {
 
   return (
     <div className="custom-slider-container">
-      <img
-        src={Images[selectImages]}
-        alt="Slider"
-        className="custom-slider-image"
-      />
+      <div className="AllImages">
+        <img
+          src={Images[selectImages]}
+          alt="Slider"
+          className="custom-slider-image"
+        />
+      </div>
 
       <button className="slider-btn left-btn" onClick={leftside}>
         <FaChevronLeft />
