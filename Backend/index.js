@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 4000
 
 // CORS Options
 const corsOptions = {
-  origin: "http://localhost:3000", // Allow requests from frontend running on this domain
+  origin: "http://localhost:3000", 
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true
 };
@@ -20,6 +20,11 @@ app.use(cookieParser());
 // Connect to Database
 const database = require("./Config/DataBaseConnect");
 database.DBConnect();
+
+const authRoute = require("./Routes/AuthRoute")
+
+app.use("/api/v1/signup", authRoute);
+app.use("/api/v1/login", authRoute)
 
 
 app.get('/', (req, res) => {

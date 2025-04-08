@@ -1,19 +1,74 @@
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import React, { useState } from 'react';
 import "../Css-Code/UserLoginSignupCSS.css";
+import { useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import UserLoginSignupNavbar from '../Navbar-Sections/UserLoginSignupNavbar';
 
 const UserLoginSignup = () => {
+  const navigate = useNavigate();
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
+
+  // Login And Signup useState
+  const [LogIn, setLogIn] = useState({ email: "", password: "" });
+  const [SignUp, setSignUp] = useState({ name: "", surname: "", email: "", password: "" });
+
+  // For SignUp Input
+  const ValueChange = (event) => {
+    setSignUp(preValue => ({
+      ...preValue,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  // For Login Input
+  const LoginValueChange = (event) => {
+    setLogIn(preValue => ({
+      ...preValue,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  // Section Sign Up
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const responceSignup = await axios.post(`http://localhost:4000/api/v1/signup/signup`, SignUp, {
+        headers: { "Content-Type": "application/json" }
+      });
+      console.log(responceSignup.data)
+      toast.success("Signup successful!");
+      navigate('/homepage');
+    } catch (error) {
+      toast.error(error.message || "Signup failed!");
+    }
+  };
+
+  // Section Login
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const responceLogin = await axios.post(`http://localhost:4000/api/v1/login/login`, LogIn, {
+        headers: { "Content-Type": "application/json" }
+      });
+      console.log(responceLogin.data)
+      toast.success("Login successful!");
+      navigate('/homepage');
+    } catch (error) {
+      toast.error(error.message || "Login failed!");
+    }
+  };
 
   return (
     <div className="main-wrapper">
       <UserLoginSignupNavbar />
 
       <div className={`container ${isRightPanelActive ? 'right-panel-active' : ''}`} id="container">
-        {/* Sign Up Form */}
+        
+        {/* Sign Up */}
         <div className="form-container sign-up-container">
-          <form>
+          <form onSubmit={handleSignUpSubmit}>
             <div className="heading">Create Account</div>
             <div className="social-container">
               <div className="social"><FaFacebookF /></div>
@@ -21,17 +76,17 @@ const UserLoginSignup = () => {
               <div className="social"><FaLinkedinIn /></div>
             </div>
             <div className="small-text">or use your email for registration</div>
-            <input className="input-field" type="text" placeholder="Name" />
-            <input className="input-field" type="text" placeholder="Surname" />
-            <input className="input-field" type="email" placeholder="Email" />
-            <input className="input-field" type="password" placeholder="Password" />
-            <div className="btn">Sign Up</div>
+            <input required name='name' value={SignUp.name} onChange={ValueChange} className="input-field" type="text" placeholder="Name" />
+            <input required name='surname' value={SignUp.surname} onChange={ValueChange} className="input-field" type="text" placeholder="Surname" />
+            <input required name='email' value={SignUp.email} onChange={ValueChange} className="input-field" type="email" placeholder="Email" />
+            <input required name='password' value={SignUp.password} onChange={ValueChange} className="input-field" type="password" placeholder="Password" />
+            <button type="submit" className="btn">Sign Up</button>
           </form>
         </div>
 
-        {/* Sign In Form */}
+        {/* Sign In */}
         <div className="form-container sign-in-container">
-          <form>
+          <form onSubmit={handleLoginSubmit}>
             <div className="heading">Sign in</div>
             <div className="social-container">
               <div className="social"><FaFacebookF /></div>
@@ -39,14 +94,14 @@ const UserLoginSignup = () => {
               <div className="social"><FaLinkedinIn /></div>
             </div>
             <div className="small-text">or use your account</div>
-            <input className="input-field" type="email" placeholder="Email" />
-            <input className="input-field" type="password" placeholder="Password" />
+            <input required name='email' value={LogIn.email} onChange={LoginValueChange} className="input-field" type="email" placeholder="Email" />
+            <input required name='password' value={LogIn.password} onChange={LoginValueChange} className="input-field" type="password" placeholder="Password" />
             <div className="forgot-link">Forgot your password?</div>
-            <div className="btn">Sign In</div>
+            <button type="submit" className="btn">Sign In</button>
           </form>
         </div>
 
-        {/* Overlay Section */}
+        {/* Overlay Panel */}
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
@@ -61,6 +116,7 @@ const UserLoginSignup = () => {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );
