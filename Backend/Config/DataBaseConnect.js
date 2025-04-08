@@ -5,7 +5,7 @@ const DBConnect = async () => {
   try {
     const uri = process.env.DATABASE_URL;
     if (!uri) {
-      throw new Error("❌ MONGODB_URI not found in .env file");
+      throw new Error("MONGODB_URI not found");
     }
 
     await mongoose.connect(uri);
