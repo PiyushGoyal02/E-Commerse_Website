@@ -1,44 +1,47 @@
-import "../Css-Code/HomePageNavbarCSS.css"
-import ECommersImage from "../Assets/E-CommersShooping.png"
-import { IoPersonSharp } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
-import { IoBag } from "react-icons/io5";
-import { useState } from "react";
+import "../Css-Code/HomePageNavbarCSS.css";
+import ECommersImage from "../Assets/E-CommersShooping.png";
+import { FaSearch } from 'react-icons/fa';
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import PersonImage from "../Assets/1724930.png";
 
-
-function HomePageNavbar (){
-    const [showOptions, setShowOptions] = useState(false);
+function HomePageNavbar() {
     return (
-        <div>
-            <div className="Navbar-Section">
-                <img
-                    src={ECommersImage}
-                    className="navbar-logo"
-                />
+        <div className="Navbar-Section">
+            {/* Logo */}
+            <div>
+                <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
+            </div>
 
-                <div className="HoverOptions">
-                    <p className="Options">NEW ARRIVALS</p>
-                    <div className="dropdown">
-                        <div className="Options">Men</div>
-                        <ul className="dropdown-menu">
-                            <li>Men Kurta</li>
-                            <li>Men Jeans</li>
-                            <li>Men Shirts</li>
-                            <li>Men T-Shirts</li>
-                        </ul>
+            <div className="OptionBar-SearchBar-Icons">
+                {/* Center Navigation + Search */}
+                <div className="Options-SearchBar">
+                    <div className="options-bar">
+                        <p>Home</p>
+                        <p>All Product</p>
+                        <p>Contact</p>
                     </div>
-                    <p className="Options">WOMEN'S</p>
-                    <p className="Options">ELECTRINIC'S</p>
+
+                    <div className="search-bar">
+                        <input type="text" placeholder="Search products" />
+                        <button type="submit">
+                            <FaSearch />
+                        </button>
+                    </div>
                 </div>
 
-                <div className="IconsSection">
-                    <IoPersonSharp />
-                    <IoSearch />
-                    <IoBag />
+                {/* Cart and Profile */}
+                <div className="icons-section">
+                    <div className="cart-icon">
+                        <AiOutlineShoppingCart />
+                        <span className="cart-count">0</span>
+                    </div>
+                    <div>
+                        <img src={PersonImage} className="PersonImage" alt="User" />
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default HomePageNavbar;
