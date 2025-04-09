@@ -1,12 +1,16 @@
-.AdminNavbarDiv{
-    border: 1px solid black;
-    background-color: white;
-    height: 150px;
-    width: 100%;
+.AdminNavbar-Section{
+  height: 80px;
+  width: 100%;
+  background-color: white;
+  color: black;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.WebsiteLogo{
-    width: 160px;
-    object-fit: cover;
-    object-position: center;
+.AdminNavbar-logo {
+  width: 150px;
 }

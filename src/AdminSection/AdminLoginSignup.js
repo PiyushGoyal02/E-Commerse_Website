@@ -1,5 +1,5 @@
 import "../AdminSectionCSS/AdminLoginSigupCSS.css";
-import AdminNavbar from "./AdminNavbar";
+import AdminNavbar from "../Navbar-Sections/AdminNavbar";
 
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -51,7 +51,7 @@ function AdminLoginSigup() {
       );
       console.log(responceSignup.data);
       toast.success("Signup successful!");
-    //   navigate("/homepage");
+      navigate("/adminhomepage");
     } catch (error) {
       toast.error(error.message || "Signup failed!");
     }
@@ -70,7 +70,7 @@ function AdminLoginSigup() {
       );
       console.log(responceLogin.data);
       toast.success("Login successful!");
-      // navigate("/homepage");
+      navigate("/adminhomepage");
     } catch (error) {
       toast.error(error.message || "Login failed!");
     }
