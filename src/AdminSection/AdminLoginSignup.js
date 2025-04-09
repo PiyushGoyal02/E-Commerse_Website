@@ -62,7 +62,7 @@ function AdminLoginSigup() {
     e.preventDefault();
     try {
       const responceLogin = await axios.post(
-        `http://localhost:4000//api/v1/adminLogin/adminlogin`,
+        `http://localhost:4000/api/v1/adminLogin/adminlogin`,
         LogIn,
         {
           headers: { "Content-Type": "application/json" },
