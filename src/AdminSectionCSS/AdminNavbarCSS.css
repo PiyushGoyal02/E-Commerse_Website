@@ -1,0 +1,12 @@
+.AdminNavbarDiv{
+    border: 1px solid black;
+    background-color: white;
+    height: 150px;
+    width: 100%;
+}
+
+.WebsiteLogo{
+    width: 160px;
+    object-fit: cover;
+    object-position: center;
+}

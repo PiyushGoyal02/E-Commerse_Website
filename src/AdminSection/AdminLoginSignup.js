@@ -1,12 +1,14 @@
+import "../AdminSectionCSS/AdminLoginSigupCSS.css";
+import AdminNavbar from "./AdminNavbar";
+
 import axios from "axios";
 import toast from "react-hot-toast";
 import React, { useState } from "react";
 import "../Css-Code/UserLoginSignupCSS.css";
 import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
-import UserLoginSignupNavbar from "../Navbar-Sections/UserLoginSignupNavbar";
 
-const UserLoginSignup = () => {
+function AdminLoginSigup() {
   const navigate = useNavigate();
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
 
@@ -15,9 +17,9 @@ const UserLoginSignup = () => {
   const [SignUp, setSignUp] = useState({
     name: "",
     surname: "",
-    accountType:"user",
     email: "",
     password: "",
+    accountType: "admin",
   });
 
   // For SignUp Input
@@ -44,12 +46,12 @@ const UserLoginSignup = () => {
         `http://localhost:4000/api/v1/signup/signup`,
         SignUp,
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {"Content-Type": "application/json"},
         }
       );
       console.log(responceSignup.data);
       toast.success("Signup successful!");
-      navigate("/homepage");
+    //   navigate("/homepage");
     } catch (error) {
       toast.error(error.message || "Signup failed!");
     }
@@ -60,7 +62,7 @@ const UserLoginSignup = () => {
     e.preventDefault();
     try {
       const responceLogin = await axios.post(
-        `http://localhost:4000/api/v1/login/login`,
+        `http://localhost:4000//api/v1/adminLogin/adminlogin`,
         LogIn,
         {
           headers: { "Content-Type": "application/json" },
@@ -68,15 +70,15 @@ const UserLoginSignup = () => {
       );
       console.log(responceLogin.data);
       toast.success("Login successful!");
-      navigate("/homepage");
+      // navigate("/homepage");
     } catch (error) {
       toast.error(error.message || "Login failed!");
     }
   };
 
   return (
-    <div className="main-wrapper">
-      <UserLoginSignupNavbar />
+    <div>
+      <AdminNavbar />
 
       <div
         className={`container ${
@@ -100,6 +102,7 @@ const UserLoginSignup = () => {
               </div>
             </div>
             <div className="small-text">or use your email for registration</div>
+
             <input
               required
               name="name"
@@ -109,6 +112,7 @@ const UserLoginSignup = () => {
               type="text"
               placeholder="Name"
             />
+
             <input
               required
               name="surname"
@@ -126,7 +130,7 @@ const UserLoginSignup = () => {
               onChange={ValueChange}
               className="input-field"
             >
-              <option value="Admin">User</option>
+              <option value="Admin">Admin</option>
             </select>
 
             <input
@@ -226,6 +230,6 @@ const UserLoginSignup = () => {
       </div>
     </div>
   );
-};
+}
 
-export default UserLoginSignup;
+export default AdminLoginSigup;
