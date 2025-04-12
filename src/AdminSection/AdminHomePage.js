@@ -1,5 +1,6 @@
 import "../AdminSectionCSS/AdminHomePageCSS.css"
 import AdminNavbar from "../Navbar-Sections/AdminNavbar";
+import AdminOrderDetails from "./AdminOrderDetails";
 import AdminProductsList from "./AdminProductsList";
 import AdminSidebar from "./AdminSidebar";
 
@@ -13,7 +14,8 @@ function AdminHomePage(){
                 </div>
 
                 <div>
-                    <AdminProductsList/>
+                    <AdminOrderDetails/>
+                    {/* <AdminProductsList/> */}
                 </div>
 
             </div>
