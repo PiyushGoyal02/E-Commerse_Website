@@ -2,6 +2,7 @@ import "../AdminSectionCSS/AdminHomePageCSS.css"
 import AdminNavbar from "../Navbar-Sections/AdminNavbar";
 import AdminOrderDetails from "./AdminOrderDetails";
 import AdminProductsList from "./AdminProductsList";
+import AdminSideAllUsers from "./AdminSideAllUsers";
 import AdminSidebar from "./AdminSidebar";
 
 function AdminHomePage(){
@@ -14,7 +15,8 @@ function AdminHomePage(){
                 </div>
 
                 <div>
-                    <AdminOrderDetails/>
+                    <AdminSideAllUsers/>
+                    {/* <AdminOrderDetails/> */}
                     {/* <AdminProductsList/> */}
                 </div>
 

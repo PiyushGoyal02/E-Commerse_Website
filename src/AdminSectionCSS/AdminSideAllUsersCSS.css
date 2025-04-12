@@ -1,0 +1,61 @@
+.AllUserstext {
+  margin: 5%;
+}
+
+.admin-main {
+  margin: 5%;
+  overflow-y: auto;
+  height: 480px;
+  width: 700px;
+}
+
+/* It's remove scrollbar */
+.admin-main {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.admin-main h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.admin-user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user-card {
+  width: 650px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.user-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user-icon {
+  font-size: 40px;
+  margin-right: 20px;
+  color: #4caf50;
+}
+
+.user-details h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.user-details p {
+  margin: 4px 0;
+  color: #555;
+}
