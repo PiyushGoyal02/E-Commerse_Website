@@ -3,6 +3,7 @@ import "../AdminSectionCSS/AdminSidebarCSS.css";
 import { MdOutlineLibraryAddCheck } from "react-icons/md";
 import { PiListHeartBold } from "react-icons/pi";
 import { TbCheckbox } from "react-icons/tb";
+import { TbUsersGroup } from "react-icons/tb";
 
 function AdminSidebar() {
     const [active, setActive] = useState("add");
@@ -31,7 +32,15 @@ function AdminSidebar() {
                     onClick={() => setActive("order")}
                 >
                     <TbCheckbox className="Icons" />
-                    <p className="Ptag-text">Order</p>
+                    <p className="Ptag-text">Orders</p>
+                </div>
+
+                <div
+                    className={`DivSection ${active === "users" ? "active" : ""}`}
+                    onClick={() => setActive("users")}
+                >
+                    <TbUsersGroup className="Icons" />
+                    <p className="Ptag-text">All User's</p>
                 </div>
             </div>
         </div>
