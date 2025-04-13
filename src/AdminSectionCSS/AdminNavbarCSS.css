@@ -14,3 +14,29 @@
 .AdminNavbar-logo {
   width: 150px;
 }
+
+.HeyAdmintext-Logoutbutton{
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.LogoutButton {
+  border: 1px solid #dadada;
+  border-radius: 100px;
+  cursor: pointer;
+  background-color: white;
+  color: rgb(35, 34, 34);
+  font-weight: 300;
+  font-size: 14px;
+  padding: 8px;
+  width: 80px;
+  transition: all 0.3s ease;
+}
+
+.LogoutButton:hover {
+  border-color: #4caf50;
+  color: #4caf50;
+  transform: scale(1.05);
+}
+

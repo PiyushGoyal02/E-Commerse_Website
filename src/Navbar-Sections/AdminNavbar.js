@@ -8,6 +8,11 @@ function AdminNavbar() {
             <div>
                 <img src={ECommersImage} className="AdminNavbar-logo" alt="GreenCart Logo" />
             </div>
+
+            <div className="HeyAdmintext-Logoutbutton">
+                <p>Hi! Admin</p>
+                <button className="LogoutButton">Logout</button>
+            </div>
         </div>
     );
 }
