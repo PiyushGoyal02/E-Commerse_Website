@@ -14,6 +14,7 @@ import Carrote from "../Assets/Carrote.jpg";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
 import HomepageSlideImages from "./HomepageSlideImages";
 import Footer from "./Footer";
+import HappyFamilyImage from "../Assets/HappyFresh_ecommerce_TEM1332_theedgemarkets.webp";
 
 function HomePage() {
   const Images = [Vegetables, Fruits, Colddrink, Maggie, Bread, Milk, Pluces];
@@ -71,9 +72,9 @@ function HomePage() {
       <HomePageNavbar />
       <div>
         <HomepageSlideImages />
-        
+
         <div className="Categories-text-wrapper">
-            <h1 className="Categories-text">Categories</h1>
+          <h1 className="Categories-text">Categories</h1>
         </div>
 
         <div className="Images-SectionDiv">
@@ -106,7 +107,27 @@ function HomePage() {
         </div>
       </div>
 
-      <Footer/>
+      <div className="happyFamilyImageDiv">
+        <img src={HappyFamilyImage} className="HappyFamilyImage" />
+      </div>
+
+      <div className="newsletter-container">
+        <h2 className="newsletter-title">Never Miss a Deal!</h2>
+        <p className="newsletter-subtitle">
+          Subscribe to get the latest offers, new arrivals, and exclusive
+          discounts
+        </p>
+        <div className="newsletter-input-group">
+          <input
+            type="email"
+            placeholder="Enter your email id"
+            className="newsletter-input"
+          />
+          <button className="newsletter-button">Subscribe</button>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 }

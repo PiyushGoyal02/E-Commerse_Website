@@ -144,3 +144,74 @@ h3 {
   background-color: #4caf50;
   color: #fff;
 }
+
+
+/* Happy Family Image CSS */
+.happyFamilyImageDiv{
+  padding: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HappyFamilyImage{
+  width: 1200px;
+  height: 600px;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Subscribe Section CSS Code */
+
+.newsletter-container {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #ffffff;
+}
+
+.newsletter-title {
+  font-size: 2rem;
+  color: #1c1c1c;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.newsletter-subtitle {
+  font-size: 1rem;
+  color: #888888;
+  margin-bottom: 30px;
+}
+
+.newsletter-input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.newsletter-button {
+  background-color: #40b883;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-button:hover {
+  background-color: #369e6f;
+}
