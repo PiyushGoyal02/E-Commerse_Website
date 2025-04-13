@@ -15,7 +15,7 @@ function AdminSideAddproducts() {
 
     // It's a function 
     function formChangeHandler(event) {
-        setformData(prevForm => ({n
+        setformData(prevForm => ({
             ...prevForm,
             [event.target.name]: event.target.value
         }));

@@ -13,6 +13,7 @@ import Onion from "../Assets/Onion.jpg";
 import Carrote from "../Assets/Carrote.jpg";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
 import HomepageSlideImages from "./HomepageSlideImages";
+import Footer from "./Footer";
 
 function HomePage() {
   const Images = [Vegetables, Fruits, Colddrink, Maggie, Bread, Milk, Pluces];
@@ -104,6 +105,8 @@ function HomePage() {
           </div>
         </div>
       </div>
+
+      <Footer/>
     </div>
   );
 }
