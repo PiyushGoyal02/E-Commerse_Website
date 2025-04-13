@@ -8,6 +8,7 @@ import AdminSideAllUsers from "./AdminSideAllUsers";
 import AdminNavbar from "../Navbar-Sections/AdminNavbar";
 import { MdOutlineLibraryAddCheck } from "react-icons/md";
 import { TbCheckbox, TbUsersGroup } from "react-icons/tb";
+import AdminSideAddproducts from "./AdminSideAddproducts";
 
 function AdminHomePage() {
     const [active, setActive] = useState("add");
@@ -53,6 +54,7 @@ function AdminHomePage() {
                 </div>
 
                 <div className="AdminMainContent">
+                    {active === "add" && <AdminSideAddproducts/>}
                     {active === "users" && <AdminSideAllUsers />}
                     {active === "order" && <AdminOrderDetails />}
                     {active === "list" && <AdminProductsList />}
