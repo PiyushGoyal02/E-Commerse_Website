@@ -1,0 +1,45 @@
+.about-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-heading {
+  text-align: center;
+  font-size: 36px;
+  color: #4caf50;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.about-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #4caf50;
+  text-align: justify;
+}
+
+
+/* For Fetcures Section CSS code */
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 20px;
+  width: 100%;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+.feature-item {
+  text-align: center;
+  color: #4caf50;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.feature-icon {
+  font-size: 36px;
+  margin-bottom: 15px;
+}

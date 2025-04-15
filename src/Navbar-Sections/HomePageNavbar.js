@@ -12,7 +12,7 @@ function HomePageNavbar() {
     return (
         <div className="Navbar-Section">
             {/* Logo */}
-            <div>
+            <div onClick={() => Navigator('/homepage')}>
                 <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
             </div>
 
@@ -22,7 +22,7 @@ function HomePageNavbar() {
                     <div className="options-bar">
                         <p onClick={() => Navigator('/homepage')}>Home</p>
                         <p onClick={() => Navigator('/allproductsui')}>All Product</p>
-                        <p onClick={() => Navigator('/contactdetails')}>Contact</p>
+                        <p onClick={() => Navigator('/aboutUs')}>About Us</p>
                     </div>
 
                     <div className="search-bar">
