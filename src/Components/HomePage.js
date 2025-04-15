@@ -68,7 +68,7 @@ function HomePage() {
   ];
 
   return (
-    <div>
+    <div className="HomePageMainDiv">
       <HomePageNavbar />
       <div>
         <HomepageSlideImages />

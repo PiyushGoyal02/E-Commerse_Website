@@ -1,3 +1,9 @@
+/* .HomePageMainDiv{
+  overflow: auto;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+} */
+
 .Categories-text-wrapper {
   display: flex;
   justify-content: center;

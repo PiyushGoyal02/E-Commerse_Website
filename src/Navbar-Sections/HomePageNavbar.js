@@ -3,8 +3,12 @@ import ECommersImage from "../Assets/E-CommersShooping.png";
 import { FaSearch } from 'react-icons/fa';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import PersonImage from "../Assets/1724930.png";
+import { useNavigate } from "react-router-dom";
 
 function HomePageNavbar() {
+
+    const Navigator = useNavigate();
+
     return (
         <div className="Navbar-Section">
             {/* Logo */}
@@ -16,9 +20,9 @@ function HomePageNavbar() {
                 {/* Center Navigation + Search */}
                 <div className="Options-SearchBar">
                     <div className="options-bar">
-                        <p>Home</p>
-                        <p>All Product</p>
-                        <p>Contact</p>
+                        <p onClick={() => Navigator('/homepage')}>Home</p>
+                        <p onClick={() => Navigator('/allproductsui')}>All Product</p>
+                        <p onClick={() => Navigator('/contactdetails')}>Contact</p>
                     </div>
 
                     <div className="search-bar">

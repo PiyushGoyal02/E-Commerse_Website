@@ -4,6 +4,8 @@ import UserLoginSignup from './Login-Signup/UserLoginSignup';
 import HomePage from './Components/HomePage';
 import AdminLoginSigup from './AdminSection/AdminLoginSignup';
 import AdminHomePage from './AdminSection/AdminHomePage';
+import AllProductsUI from './Components/AllProductsUI';
+import ContactDetails from './Components/ContactDetails';
 
 function App() {
   return (
@@ -11,7 +13,8 @@ function App() {
       <Routes>
         <Route path='/' element={<UserLoginSignup/>}></Route>
         <Route path='/homepage' element={<HomePage/>}></Route>
-
+        <Route path='/allproductsui' element={<AllProductsUI/>}></Route>
+        <Route path='/contactdetails' element={<ContactDetails/>}></Route>
 
 
         {/* Admin Section Routes */}
