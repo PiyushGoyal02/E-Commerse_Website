@@ -113,3 +113,35 @@
   object-fit: cover;
   cursor: pointer;
 }
+
+
+
+/* After Click Profile Button and show a box CSS Code */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  padding: 10px;
+  z-index: 999;
+  min-width: 120px;
+  color: black;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}

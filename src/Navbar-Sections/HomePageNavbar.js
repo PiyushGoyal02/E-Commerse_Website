@@ -4,10 +4,25 @@ import { FaSearch } from 'react-icons/fa';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import PersonImage from "../Assets/1724930.png";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
 
 function HomePageNavbar() {
 
     const Navigator = useNavigate();
+
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef(null);  // Connect with HTML elememt
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     return (
         <div className="Navbar-Section">
@@ -40,10 +55,17 @@ function HomePageNavbar() {
                         <span className="cart-count">0</span>
                     </div>
                     <div>
-                        <img src={PersonImage} className="PersonImage" alt="User" />
+                        <img onClick={() => setOpen(!open)} src={PersonImage} className="PersonImage" alt="User" />
                     </div>
                 </div>
             </div>
+
+            {open && (
+                <div className="dropdown-menu">
+                    <button onClick={() => Navigator('/profiledetails')}>Profile</button>
+                    <button onClick={() => Navigator('/')}>Logout</button>
+                </div>
+            )}
         </div>
     );
 }

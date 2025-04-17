@@ -6,6 +6,7 @@ import AdminLoginSigup from './AdminSection/AdminLoginSignup';
 import AdminHomePage from './AdminSection/AdminHomePage';
 import AllProductsUI from './Components/AllProductsUI';
 import AboutUs from './Components/AboutUs';
+import ProfileDetails from './Components/ProfileDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/homepage' element={<HomePage/>}></Route>
         <Route path='/allproductsui' element={<AllProductsUI/>}></Route>
         <Route path='/aboutUs' element={<AboutUs/>}></Route>
+        <Route path='/profiledetails' element={<ProfileDetails/>}></Route>
 
 
         {/* Admin Section Routes */}
