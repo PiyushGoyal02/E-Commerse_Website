@@ -24,7 +24,9 @@ database.DBConnect();
 // User Section for Routes
 const authRoute = require("./Routes/AuthRoute")
 const profileDetails = require("./Routes/profileDetailsRoute")
+const allUsersDetails = require("./Routes/getAllUserDataRoute")
 
+app.use("/api/v1/getAllusersData", allUsersDetails)
 app.use("/api/v1/signup", authRoute);
 app.use("/api/v1/login", authRoute)
 app.use("/api/v1/profileDetails",profileDetails)
