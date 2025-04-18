@@ -25,12 +25,17 @@ const UserLoginSignup = () => {
   const LoginValueChange = (e) =>
     setLogIn((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
+  // Sign up Section APIs
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`http://localhost:4000/api/v1/signup/signup`, SignUp, {
         headers: { "Content-Type": "application/json" },
       });
+      const userSignupUserid = res.data.user._id;
+      console.log(userSignupUserid)
+      localStorage.setItem("userSignupUserid", userSignupUserid);
+
       toast.success("Signup successful!");
       navigate("/homepage");
     } catch (error) {
@@ -38,12 +43,17 @@ const UserLoginSignup = () => {
     }
   };
 
+  // Login Section APIs
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`http://localhost:4000/api/v1/login/login`, LogIn, {
         headers: { "Content-Type": "application/json" },
       });
+      const userLoginUserId = res.data.user._id;
+      console.log(userLoginUserId)
+      localStorage.setItem("userLoginUserId", userLoginUserId);
+
       toast.success("Login successful!");
       navigate("/homepage");
     } catch (error) {

@@ -4,30 +4,57 @@ const UserAuth = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
     },
 
     surname: {
       type: String,
-      required: true,
     },
 
     email: {
       type: String,
-      required: true,
     },
 
     password: {
       type: String,
-      required: true,
     },
 
     accountType: {
       type: String,
-      required: true,
       enum: ['admin', 'user'],
     },
-  },
+
+    address: {
+      type: String,
+    },
+
+    pincode: {
+      type: String,
+    },
+
+    landmark: {
+      type: String,
+    },
+
+    number: {
+      type: String,
+    },
+
+    houseNum: {
+      type: String,
+    },
+
+    state: {
+      type: String,
+    },
+
+    country: {
+      type: String,
+    },
+
+    type: {
+      type: String,
+    }
+  }
 );
 
 module.exports = mongoose.model("UserAuth", UserAuth);

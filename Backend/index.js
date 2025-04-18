@@ -23,9 +23,11 @@ database.DBConnect();
 
 // User Section for Routes
 const authRoute = require("./Routes/AuthRoute")
+const profileDetails = require("./Routes/profileDetailsRoute")
 
 app.use("/api/v1/signup", authRoute);
 app.use("/api/v1/login", authRoute)
+app.use("/api/v1/profileDetails",profileDetails)
 
 // Admin Section for Routes 
 const addProducts = require("./Routes/Admin_Routes/addProductsRoute")

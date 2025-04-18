@@ -1,15 +1,18 @@
 import { useState } from "react";
 import "../Css-Code/ProfileDetailsCSS.css";
+import toast from "react-hot-toast";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
+import axios from "axios";
 
 function ProfileDetails() {
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
     address: "",
     landmark: "",
-    pin: "",
+    pincode: "",
     number: "",
     houseNum: "",
     state: "",
@@ -25,10 +28,41 @@ function ProfileDetails() {
     }));
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-  }
+
+    const userId = localStorage.getItem("userLoginUserId") || localStorage.getItem("userSignupUserid");
+    console.log(userId)
+
+    if (!userId) {
+      toast.error("User not logged in. Please login first.");
+      return;
+    }
+
+    const combinedData = {
+      ...formData,
+      userId,
+    };
+
+    try {
+      const profileDetailsResponce = await axios.post(
+        `http://localhost:4000/api/v1/profileDetails/profileDetails`,
+        combinedData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      const final = profileDetailsResponce.data;
+      console.log(final);
+      toast.success("Your Data Softly Updated!");
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Your Profile Didn't Update");
+    }
+  };
+
 
   return (
     <div className="pd-page-wrapper">
@@ -108,11 +142,11 @@ function ProfileDetails() {
               <label htmlFor="pin">Pin Code</label>
               <input
                 type="text"
-                name="pin"
+                name="pincode"
                 id="pin"
                 placeholder="Type here..."
                 required
-                value={formData.pin}
+                value={formData.pincode}
                 onChange={changeFormHandler}
               />
             </div>
