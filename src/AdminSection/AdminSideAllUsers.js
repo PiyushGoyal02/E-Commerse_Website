@@ -1,48 +1,27 @@
 import "../AdminSectionCSS/AdminSideAllUsersCSS.css";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function AdminSideAllUsers() {
-  const users = [
-    {
-      name: "Piyush",
-      surname: "Goyal",
-      address: "Main Bazar Tehsil Chowk",
-      pincode: "125050",
-      number: "968574xxxx",
-      country: "India",
-      state: "Haryana",
-      email: "piyush123@gmail.com",
-    },
-    {
-      name: "joy",
-      surname: "joy",
-      address: "Rajendra Nagar, Sector 5",
-      pincode: "110060",
-      number: "987654xxxx",
-      country: "India",
-      state: "Delhi",
-      email: "joy.joy@example.com",
-    },
-    {
-      name: "Ankit",
-      surname: "Sharma",
-      address: "MG Road, Near Metro Station",
-      pincode: "741258",
-      number: "912345xxxx",
-      country: "India",
-      state: "Karnataka",
-      email: "ankit.sharma@gmail.com",
-    },
-    {
-      name: "Cio",
-      surname: "Patel",
-      address: "Satellite Area, Ahmedabad",
-      pincode: "458741",
-      number: "998877xxxx",
-      country: "India",
-      state: "Gujarat",
-      email: "cio.patel@outlook.com",
-    },
-  ];
+
+  const [users, setUserDetails] = useState([]);
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/v1/getAllusersData/allUserDetails`, {
+          withCredentials: true, 
+        });
+        console.log(response.data);
+        setUserDetails(response.data.data);  // ✅ Correct way
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers(); 
+  }, []);
 
   return (
       <div>
