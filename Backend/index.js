@@ -21,11 +21,17 @@ app.use(cookieParser());
 const database = require("./Config/DataBaseConnect");
 database.DBConnect();
 
+// User Section for Routes
 const authRoute = require("./Routes/AuthRoute")
 
 app.use("/api/v1/signup", authRoute);
 app.use("/api/v1/login", authRoute)
+
+// Admin Section for Routes 
+const addProducts = require("./Routes/Admin_Routes/addProductsRoute")
+
 app.use("/api/v1/adminLogin", authRoute)
+app.use("/api/v1/addproducts", addProducts)
 
 
 app.get('/', (req, res) => {

@@ -4,7 +4,6 @@ import AdminNavbar from "../Navbar-Sections/AdminNavbar";
 import axios from "axios";
 import toast from "react-hot-toast";
 import React, { useState } from "react";
-import "../Css-Code/UserLoginSignupCSS.css";
 import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 

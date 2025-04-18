@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "../AdminSectionCSS/AdminSideAddproductsCSS.css";
-import { IoCloudUploadOutline } from "react-icons/io5";
+import { IoCloudUploadOutline, IoConstructSharp } from "react-icons/io5";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function AdminSideAddproducts() {
 
@@ -30,25 +32,40 @@ function AdminSideAddproducts() {
     ];
 
     // This is a fuction for APIs call
-    function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Data:", formData);
+
+        try{
+
+            const responceAddProducts = await axios.post(`http://localhost:4000/api/v1/addproducts/addProducts`, formData, {
+                headers: { "Content-Type": "application/json" },
+            })
+
+            console.log(responceAddProducts.data)
+            toast.success("Your Product Successfully Add")
+
+        }catch(error){
+            console.log(error.message)
+            toast.error("Your Product Doesn't Add")
+        }
+        
     }
 
     return (
         <div>
             <div className="MainDivAddProducts">
                 <p className="productsImages">Products Images</p>
-                <div className="image-container">
-                    {imagebox.map((value, index) => (
-                        <div className="singleImageBox" key={index}>
-                            {value.image}
-                            <p>{value.name}</p>
-                        </div>
-                    ))}
-                </div>
 
                 <form onSubmit={handleSubmit}>
+
+                    <div className="image-container">
+                        {imagebox.map((value, index) => (
+                            <div className="singleImageBox" key={index}>
+                                {value.image}
+                                <p>{value.name}</p>
+                            </div>
+                        ))}
+                    </div>
                     
                     <div className="LabelInputDiv">
                         <label className="labelText">Products Name</label>

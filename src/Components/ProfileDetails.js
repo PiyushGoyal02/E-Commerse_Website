@@ -31,14 +31,14 @@ function ProfileDetails() {
   }
 
   return (
-    <div className="profile-page">
+    <div className="pd-page-wrapper">
       <HomePageNavbar />
-      <div className="form-container">
-        <form className="profile-form" onSubmit={handleSubmit}>
-          <h2 className="form-title">Profile Details</h2>
+      <div className="pd-form-wrapper">
+        <form className="pd-form" onSubmit={handleSubmit}>
+          <h2 className="pd-title">Profile Details</h2>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="pd-row">
+            <div className="pd-group">
               <label htmlFor="name">Name</label>
               <input
                 type="text"
@@ -50,7 +50,7 @@ function ProfileDetails() {
                 onChange={changeFormHandler}
               />
             </div>
-            <div className="form-group">
+            <div className="pd-group">
               <label htmlFor="surname">Surname</label>
               <input
                 type="text"
@@ -64,8 +64,8 @@ function ProfileDetails() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="pd-row">
+            <div className="pd-group">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -77,7 +77,7 @@ function ProfileDetails() {
                 onChange={changeFormHandler}
               />
             </div>
-            <div className="form-group">
+            <div className="pd-group">
               <label htmlFor="number">Phone No.</label>
               <input
                 type="text"
@@ -91,8 +91,8 @@ function ProfileDetails() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="pd-row">
+            <div className="pd-group">
               <label htmlFor="address">Address</label>
               <input
                 type="text"
@@ -104,7 +104,7 @@ function ProfileDetails() {
                 onChange={changeFormHandler}
               />
             </div>
-            <div className="form-group">
+            <div className="pd-group">
               <label htmlFor="pin">Pin Code</label>
               <input
                 type="text"
@@ -118,8 +118,8 @@ function ProfileDetails() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="pd-row">
+            <div className="pd-group">
               <label htmlFor="landmark">Landmark</label>
               <input
                 type="text"
@@ -131,7 +131,7 @@ function ProfileDetails() {
                 onChange={changeFormHandler}
               />
             </div>
-            <div className="form-group">
+            <div className="pd-group">
               <label htmlFor="houseNum">House No.</label>
               <input
                 type="text"
@@ -145,8 +145,8 @@ function ProfileDetails() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className="pd-row">
+            <div className="pd-group">
               <label htmlFor="state">State</label>
               <input
                 type="text"
@@ -158,7 +158,7 @@ function ProfileDetails() {
                 onChange={changeFormHandler}
               />
             </div>
-            <div className="form-group">
+            <div className="pd-group">
               <label htmlFor="country">Country</label>
               <input
                 type="text"
@@ -172,7 +172,7 @@ function ProfileDetails() {
             </div>
           </div>
 
-          <div className="radio-row">
+          <div className="pd-radio-options">
             <label>
               <input
                 type="radio"
@@ -195,7 +195,7 @@ function ProfileDetails() {
             </label>
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="pd-submit-btn">
             Save Details
           </button>
         </form>
