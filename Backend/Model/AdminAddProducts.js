@@ -28,7 +28,7 @@ const addProducts = new mongoose.Schema (
         },
 
         productImages: {
-            type: [String],
+            type: String,
             required: true,
         },
     }

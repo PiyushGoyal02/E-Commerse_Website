@@ -16,12 +16,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
   border-radius: 8px;
   color: #666;
   font-size: 14px;
   cursor: pointer;
   margin-bottom: 15px;
+}
+
+.previewImage{
+    width: 120px;
+    height: 135px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.removeBtnImage{
+    font-size: 18px;
+    margin-top: 10px;
+    /* cursor: pointer; */
 }
 
 .image-container {

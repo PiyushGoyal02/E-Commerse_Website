@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../AdminSectionCSS/AdminSideAddproductsCSS.css";
-import { IoCloudUploadOutline, IoConstructSharp } from "react-icons/io5";
+import { IoCloudUploadOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
+import { RxCrossCircled } from "react-icons/rx";
 import axios from "axios";
 
 function AdminSideAddproducts() {
@@ -12,7 +13,8 @@ function AdminSideAddproducts() {
         descriptionText: "", 
         productprice: "",
         productsquantity: "",
-        category: ""
+        category: "",
+        productImage: ""
     });
 
     // It's a function 
@@ -23,13 +25,28 @@ function AdminSideAddproducts() {
         }));
     }
 
-    // It's a images box for UI
-    const imagebox = [
-        { name: "Upload", image: <IoCloudUploadOutline /> },
-        { name: "Upload", image: <IoCloudUploadOutline /> },
-        { name: "Upload", image: <IoCloudUploadOutline /> },
-        { name: "Upload", image: <IoCloudUploadOutline /> }
-    ];
+    // It's for images Section. Is Image show or not On UI..
+    const [imagePreview, setImagePreview] = useState(null);
+    // console.log(imagePreview)
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setImagePreview(imageUrl);
+
+            // Save the actual file to formData
+            setformData(prev => ({
+                ...prev,
+                productImage: file
+            }));
+        }
+    };
+
+    // Image Remove from Ui
+    const handleRemoveImage = () => {
+        setImagePreview(null);
+    };
 
     // This is a fuction for APIs call
     const handleSubmit = async (e) => {
@@ -58,14 +75,35 @@ function AdminSideAddproducts() {
 
                 <form onSubmit={handleSubmit}>
 
-                    <div className="image-container">
-                        {imagebox.map((value, index) => (
-                            <div className="singleImageBox" key={index}>
-                                {value.image}
-                                <p>{value.name}</p>
+                    <div className="singleImageBox">
+                        {!imagePreview ? (
+                            <>
+                            <label htmlFor="imageUpload">
+                                <IoCloudUploadOutline size={30} />
+                                <p>Upload</p>
+                            </label>
+                            <input
+                                type="file"
+                                id="imageUpload"
+                                accept="image/*"
+                                name="productImage"
+                                value={formData.productImage}
+                                onChange={handleImageChange}
+                                // style={{ display: "none" }}
+                            />
+                            </>
+                        ) : (
+                            <div className="image-preview-wrapper">
+                                <img
+                                    src={imagePreview}
+                                    alt="Uploaded Preview"
+                                    className="previewImage"
+                                />
+                                <RxCrossCircled className="removeBtnImage" onClick={handleRemoveImage}/>
                             </div>
-                        ))}
+                        )}
                     </div>
+
                     
                     <div className="LabelInputDiv">
                         <label className="labelText">Products Name</label>

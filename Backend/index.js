@@ -25,7 +25,9 @@ database.DBConnect();
 const authRoute = require("./Routes/AuthRoute")
 const profileDetails = require("./Routes/profileDetailsRoute")
 const allUsersDetails = require("./Routes/getAllUserDataRoute")
+const getAllproducts = require("./Routes/getAllProductsRoute")
 
+app.use("/api/v1/getAllProductsDetails", getAllproducts)
 app.use("/api/v1/getAllusersData", allUsersDetails)
 app.use("/api/v1/signup", authRoute);
 app.use("/api/v1/login", authRoute)
