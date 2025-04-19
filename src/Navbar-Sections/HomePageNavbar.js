@@ -50,7 +50,7 @@ function HomePageNavbar() {
 
                 {/* Cart and Profile */}
                 <div className="icons-section">
-                    <div className="cart-icon">
+                    <div onClick={() => Navigator("/cartsection")} className="cart-icon">
                         <AiOutlineShoppingCart />
                         <span className="cart-count">0</span>
                     </div>

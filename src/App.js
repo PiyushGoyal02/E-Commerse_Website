@@ -7,6 +7,7 @@ import AdminHomePage from './AdminSection/AdminHomePage';
 import AllProductsUI from './Components/AllProductsUI';
 import AboutUs from './Components/AboutUs';
 import ProfileDetails from './Components/ProfileDetails';
+import CartSection from './Components/CartSection';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/allproductsui' element={<AllProductsUI/>}></Route>
         <Route path='/aboutUs' element={<AboutUs/>}></Route>
         <Route path='/profiledetails' element={<ProfileDetails/>}></Route>
+        <Route path="/cartsection" element={<CartSection/>}></Route>
 
 
         {/* Admin Section Routes */}
