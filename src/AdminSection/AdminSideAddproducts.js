@@ -6,91 +6,99 @@ import { RxCrossCircled } from "react-icons/rx";
 import axios from "axios";
 
 function AdminSideAddproducts() {
-
-    // It's a useState for save all form data
-    const [formData, setformData] = useState({ 
-        productName: "", 
-        descriptionText: "", 
+    const [formData, setFormData] = useState({
+        productName: "",
+        descriptionText: "",
         productprice: "",
         productsquantity: "",
         category: "",
-        productImage: ""
+        productImage: null
     });
 
-    // It's a function 
+    const [imagePreview, setImagePreview] = useState(null);
+
     function formChangeHandler(event) {
-        setformData(prevForm => ({
-            ...prevForm,
-            [event.target.name]: event.target.value
+        const { name, value } = event.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
         }));
     }
-
-    // It's for images Section. Is Image show or not On UI..
-    const [imagePreview, setImagePreview] = useState(null);
-    // console.log(imagePreview)
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setImagePreview(imageUrl);
-
-            // Save the actual file to formData
-            setformData(prev => ({
+            setFormData((prev) => ({
                 ...prev,
                 productImage: file
             }));
         }
     };
 
-    // Image Remove from Ui
     const handleRemoveImage = () => {
         setImagePreview(null);
+        setFormData((prev) => ({
+            ...prev,
+            productImage: null
+        }));
     };
 
-    // This is a fuction for APIs call
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
-
-            const responceAddProducts = await axios.post(`http://localhost:4000/api/v1/addproducts/addProducts`, formData, {
-                headers: { "Content-Type": "application/json" },
-            })
-
-            console.log(responceAddProducts.data)
-            toast.success("Your Product Successfully Add")
-
-        }catch(error){
-            console.log(error.message)
-            toast.error("Your Product Doesn't Add")
+        if (!formData.productName || !formData.productprice || !formData.productImage) {
+            toast.error("Please fill all required fields!");
+            return;
         }
-        
-    }
+
+        const data = new FormData();
+        data.append("productName", formData.productName);
+        data.append("descriptionText", formData.descriptionText);
+        data.append("productprice", formData.productprice);
+        data.append("productsquantity", formData.productsquantity);
+        data.append("category", formData.category);
+        data.append("productImage", formData.productImage); // Fixed field name
+
+        try {
+            const response = await axios.post(
+                "http://localhost:4000/api/v1/addproducts/addProducts",
+                data,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            );
+            console.log(response.data);
+            toast.success("Your Product Successfully Added");
+        } catch (error) {
+            console.error(error.response?.data || error.message);
+            toast.error("Your Product Was Not Added");
+        }
+    };
 
     return (
         <div>
             <div className="MainDivAddProducts">
                 <p className="productsImages">Products Images</p>
-
                 <form onSubmit={handleSubmit}>
-
                     <div className="singleImageBox">
                         {!imagePreview ? (
                             <>
-                            <label htmlFor="imageUpload">
-                                <IoCloudUploadOutline size={30} />
-                                <p>Upload</p>
-                            </label>
-                            <input
-                                type="file"
-                                id="imageUpload"
-                                accept="image/*"
-                                name="productImage"
-                                value={formData.productImage}
-                                onChange={handleImageChange}
-                                // style={{ display: "none" }}
-                            />
+                                <label htmlFor="imageUpload">
+                                    <IoCloudUploadOutline size={30} />
+                                    <p>Upload</p>
+                                </label>
+                                <input
+                                    type="file"
+                                    id="imageUpload"
+                                    accept="image/*"
+                                    name="productImage"
+                                    onChange={handleImageChange}
+                                    style={{ display: "none" }}
+                                />
                             </>
                         ) : (
                             <div className="image-preview-wrapper">
@@ -99,12 +107,14 @@ function AdminSideAddproducts() {
                                     alt="Uploaded Preview"
                                     className="previewImage"
                                 />
-                                <RxCrossCircled className="removeBtnImage" onClick={handleRemoveImage}/>
+                                <RxCrossCircled
+                                    className="removeBtnImage"
+                                    onClick={handleRemoveImage}
+                                />
                             </div>
                         )}
                     </div>
 
-                    
                     <div className="LabelInputDiv">
                         <label className="labelText">Products Name</label>
                         <input
@@ -131,9 +141,9 @@ function AdminSideAddproducts() {
 
                     <div className="LabelInputDiv">
                         <label className="labelText">Category</label>
-                        <select 
-                            name="category" 
-                            className="OptionSection" 
+                        <select
+                            name="category"
+                            className="OptionSection"
                             value={formData.category}
                             onChange={formChangeHandler}
                         >
@@ -147,7 +157,9 @@ function AdminSideAddproducts() {
 
                     <div className="Productsprice-Productsquantity-MainDiv">
                         <div className="LabelInputDiv">
-                            <label className="labelText" htmlFor="price">Product Price</label>
+                            <label className="labelText" htmlFor="price">
+                                Product Price
+                            </label>
                             <input
                                 id="price"
                                 type="text"
@@ -159,7 +171,9 @@ function AdminSideAddproducts() {
                         </div>
 
                         <div className="LabelInputDiv">
-                            <label className="labelText" htmlFor="quantity">Product Quantity</label>
+                            <label className="labelText" htmlFor="quantity">
+                                Product Quantity
+                            </label>
                             <input
                                 type="text"
                                 id="quantity"
@@ -172,9 +186,10 @@ function AdminSideAddproducts() {
                     </div>
 
                     <div className="buttonDiv">
-                        <button className="AddButton" type="submit">Add</button>
+                        <button className="AddButton" type="submit">
+                            Add
+                        </button>
                     </div>
-
                 </form>
             </div>
         </div>

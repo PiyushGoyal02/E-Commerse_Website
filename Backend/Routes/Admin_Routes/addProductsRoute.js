@@ -1,8 +1,9 @@
-const express = require("express")
+const express = require("express");
 const route = express.Router();
 
-const { addProducts } = require("../../Contrallers/Admin_Side/addProducts")
+const upload = require("../../Middleware/CloudinaryMiddleware"); // import your multer-cloudinary config
+const { addProducts } = require("../../Contrallers/Admin_Side/addProducts"); // fix typo in 'Controllers'
 
-route.post("/addProducts", addProducts)
+route.post("/addProducts", upload.single("productImage"), addProducts);
 
-module.exports = route
+module.exports = route;

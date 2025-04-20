@@ -1,25 +1,40 @@
 const addproductsModel = require("../../Model/AdminAddProducts");
 
-// Add new product with image
 exports.addProducts = async (req, res) => {
   try {
-    const { productName, descriptionText, productprice, productsquantity, category, productImages } = req.body;
+    const {
+      productName,
+      descriptionText,
+      productprice,
+      productsquantity,
+      category,
+    } = req.body;
 
-    if (!productImages || !productName || !descriptionText || !productprice || !productsquantity || !category) {
+    // Check required fields
+    if (
+      !req.file ||
+      !productName ||
+      !descriptionText ||
+      !productprice ||
+      !productsquantity ||
+      !category
+    ) {
       return res.status(400).json({
         success: false,
         message: "Please fill all required fields",
       });
     }
 
-    // Create new product
+    // Cloudinary returns full public URL in req.file.path
+    const imageUrl = req.file.path;
+
     const newProduct = new addproductsModel({
       productName,
       descriptionText,
       productprice,
       productsquantity,
       category,
-      productImages
+      productImages: imageUrl,
     });
 
     await newProduct.save();
@@ -31,7 +46,7 @@ exports.addProducts = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error.message);
+    console.error("Add Product Error:", error);
     res.status(500).json({
       success: false,
       message: "Server error, product not added",
