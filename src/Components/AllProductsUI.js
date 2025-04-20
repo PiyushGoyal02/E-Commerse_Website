@@ -32,10 +32,10 @@ function AllProductsUI() {
         <div className="veggie-grid">
           {products.map((product, index) => (
             <div className="veggie-card" key={product._id}>
-              {/* <img
-                src={product.image || defaultImages[index % defaultImages.length]}
+              <img
+                src={product.productImages}
                 alt={product.productName}
-              /> */}
+              />
               <p className="category">{product.category}</p>
               <h3>{product.productName}</h3>
               <div className="stars">

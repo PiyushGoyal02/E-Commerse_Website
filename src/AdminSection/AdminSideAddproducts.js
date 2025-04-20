@@ -158,6 +158,8 @@ function AdminSideAddproducts() {
                             <option value="vegetables">Vegetables</option>
                             <option value="dairy">Dairy</option>
                             <option value="bakery">Bakery items</option>
+                            <option value="softDrink">Soft Drink</option>
+                            <option value="Gernal">Gernal</option>
                         </select>
                     </div>
 
