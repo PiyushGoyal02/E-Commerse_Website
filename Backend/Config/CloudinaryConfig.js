@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2;   // ( .v2 ) We are using cloudinary version 2
 require("dotenv").config();
 
 cloudinary.config({

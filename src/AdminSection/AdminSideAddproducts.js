@@ -15,8 +15,13 @@ function AdminSideAddproducts() {
         productImage: null
     });
 
+    /*To display the image on the UI, we first need to check whether the image
+     `is present or not. Initially, the value will be `null`,
+      which means the image is not yet displayed on the UI.
+    const [imagePreview, setImagePreview] = useState(null); */
     const [imagePreview, setImagePreview] = useState(null);
 
+    // Form data onChange Value
     function formChangeHandler(event) {
         const { name, value } = event.target;
         setFormData((prev) => ({
@@ -28,7 +33,7 @@ function AdminSideAddproducts() {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
+            const imageUrl = URL.createObjectURL(file);  // This line use for see my fileSystem/imageURL It's craete a temporary URL
             setImagePreview(imageUrl);
             setFormData((prev) => ({
                 ...prev,
@@ -37,6 +42,7 @@ function AdminSideAddproducts() {
         }
     };
 
+    // This is for remove image Cross button
     const handleRemoveImage = () => {
         setImagePreview(null);
         setFormData((prev) => ({
@@ -54,7 +60,7 @@ function AdminSideAddproducts() {
         }
 
         const data = new FormData();
-        data.append("productName", formData.productName);
+        data.append("productName", formData.productName);  // append function (this is for add vlaue/value jodna)
         data.append("descriptionText", formData.descriptionText);
         data.append("productprice", formData.productprice);
         data.append("productsquantity", formData.productsquantity);
