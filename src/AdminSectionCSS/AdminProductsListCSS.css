@@ -56,7 +56,10 @@
 }
 
 .product-image {
-  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .product-name {

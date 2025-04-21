@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import "../AdminSectionCSS/AdminNavbarCSS.css";
 import ECommersImage from "../Assets/E-CommersShooping.png";
 
 function AdminNavbar() {
+    const Navigator = useNavigate();
     return (
         <div className="AdminNavbar-Section">
             {/* Logo */}
             <div>
-                <img src={ECommersImage} className="AdminNavbar-logo" alt="GreenCart Logo" />
+                <img onClick={() => Navigator("/adminhomepage")} src={ECommersImage} className="AdminNavbar-logo" alt="GreenCart Logo" />
             </div>
 
             <div className="HeyAdmintext-Logoutbutton">
