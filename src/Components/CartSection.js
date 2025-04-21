@@ -1,37 +1,26 @@
 import "../Css-Code/CartSectionCSS.css";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
-import Pluces from "../Assets/PlucesAndGrain.webp";
-import Patato from "../Assets/Patato.jpg";
-import Spinach from "../Assets/Spinach.jpg";
-import CrossPNG from "../Assets/remove.png"
+import CrossPNG from "../Assets/remove.png";
 import { useNavigate } from "react-router-dom";
 import { FaLongArrowAltLeft } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 function CartSection() {
+  const Navigator = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
 
-    const Navigator = useNavigate();
-  const products = [
-    {
-      id: 1,
-      name: "Carrot 500g",
-      price: 44,
-      image: Pluces,
-    },
-    {
-      id: 2,
-      name: "Brown Bread 400g",
-      price: 35,
-      image: Patato,
-    },
-    {
-      id: 3,
-      name: "Banana 1kg",
-      price: 45,
-      image: Spinach,
-    },
-  ];
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(storedCart);
+  }, []);
 
-  const price = products.reduce((acc, item) => acc + item.price, 0);
+  const removeFromCart = (id) => {
+    const updatedCart = cartItems.filter((item) => item._id !== id);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartItems(updatedCart);
+  };
+
+  const price = cartItems.reduce((acc, item) => acc + item.productprice * item.quantity, 0);
   const tax = (price * 0.02).toFixed(2);
   const total = (price + parseFloat(tax)).toFixed(2);
 
@@ -42,7 +31,7 @@ function CartSection() {
       <div className="shopping-container">
         <div className="cart">
           <h2>
-            Shopping Cart <span className="green">{products.length} Items</span>
+            Shopping Cart <span className="green">{cartItems.length} Items</span>
           </h2>
 
           <div className="Products-Subtotal-Action-text">
@@ -52,41 +41,51 @@ function CartSection() {
           </div>
 
           <div className="cart-items">
-            {products.map((item) => (
-              <div className="cart-item" key={item.id}>
+            {cartItems.map((item) => (
+              <div className="cart-item" key={item._id}>
                 <div className="item-left">
-                  <img src={item.image} alt={item.name} />
+                  <img src={item.productImages} alt={item.productName} />
                   <div className="details">
-                    <h5>{item.name}</h5>
+                    <h5>{item.productName}</h5>
                     <p>Weight: N/A</p>
-                    <select className="qtySelect">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
+                    <select
+                      className="qtySelect"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        const updatedCart = cartItems.map((prod) =>
+                          prod._id === item._id
+                            ? { ...prod, quantity: parseInt(e.target.value) }
+                            : prod
+                        );
+                        localStorage.setItem("cart", JSON.stringify(updatedCart));
+                        setCartItems(updatedCart);
+                      }}
+                    >
+                      {[...Array(10).keys()].map((num) => (
+                        <option key={num} value={num}>
+                          {num}
+                        </option>
+                      ))}
                     </select>
-
                   </div>
                 </div>
-                <div className="subtotal">${item.price}</div>
-                <img src={CrossPNG} alt="remove" className="removeIMG" />
+                <div className="subtotal">₹{item.productprice * item.quantity}</div>
+                <img
+                  src={CrossPNG}
+                  alt="remove"
+                  className="removeIMG"
+                  onClick={() => removeFromCart(item._id)}
+                />
               </div>
             ))}
           </div>
 
           <div className="ContinuesShoopingDiv">
             <FaLongArrowAltLeft />
-            <p onClick={() => Navigator('/allproductsui')} className="continue">
-                Continue Shopping
+            <p onClick={() => Navigator("/allproductsui")} className="continue">
+              Continue Shopping
             </p>
           </div>
-
         </div>
 
         <div className="summary">
@@ -107,7 +106,7 @@ function CartSection() {
 
           <div className="costs">
             <p>Price</p>
-            <span>${price}</span>
+            <span>₹{price}</span>
           </div>
           <div className="costs">
             <p>Shipping Fee</p>
@@ -115,12 +114,12 @@ function CartSection() {
           </div>
           <div className="costs">
             <p>Tax (2%)</p>
-            <span>${tax}</span>
+            <span>₹{tax}</span>
           </div>
 
           <div className="total">
             <p>Total Amount:</p>
-            <span>${total}</span>
+            <span>₹{total}</span>
           </div>
 
           <button className="place-order">Place Order</button>

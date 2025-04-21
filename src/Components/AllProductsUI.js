@@ -6,7 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function AllProductsUI() {
-
   const Navigator = useNavigate();
   const [products, setProducts] = useState([]);
 
@@ -17,7 +16,6 @@ function AllProductsUI() {
           `http://localhost:4000/api/v1/getAllProductsDetails/getAllProducts`,
           { withCredentials: true }
         );
-        console.log(response.data.data);
         setProducts(response.data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -27,18 +25,33 @@ function AllProductsUI() {
     fetchProducts();
   }, []);
 
+  const addToCart = (product) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find((item) => item._id === product._id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Product added to cart!");
+  };
+
   return (
     <div>
       <HomePageNavbar />
       <div className="veggie-section">
         <h2>ALL PRODUCTS</h2>
         <div className="veggie-grid">
-          {products.map((product, index) => (
-            <div onClick={() => Navigator("/singleproductsui", { state: { product }})} className="veggie-card" key={product._id}>
-              <img
-                src={product.productImages}
-                alt={product.productName}
-              />
+          {products.map((product) => (
+            <div
+              onClick={() => Navigator("/singleproductsui", { state: { product } })}
+              className="veggie-card"
+              key={product._id}
+            >
+              <img src={product.productImages} alt={product.productName} />
               <p className="category">{product.category}</p>
               <h3>{product.productName}</h3>
               <div className="stars">
@@ -50,7 +63,15 @@ function AllProductsUI() {
                 <span className="new">₹{product.productprice}</span>
                 <span className="old">₹{parseInt(product.productprice) + 10}</span>
               </div>
-              <button className="add-btn">🛒 Add</button>
+              <button
+                className="add-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart(product);
+                }}
+              >
+                🛒 Add
+              </button>
             </div>
           ))}
         </div>
