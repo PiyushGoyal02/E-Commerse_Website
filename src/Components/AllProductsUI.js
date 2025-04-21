@@ -3,8 +3,11 @@ import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
 import Footer from "./Footer.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function AllProductsUI() {
+
+  const Navigator = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -31,7 +34,7 @@ function AllProductsUI() {
         <h2>ALL PRODUCTS</h2>
         <div className="veggie-grid">
           {products.map((product, index) => (
-            <div className="veggie-card" key={product._id}>
+            <div onClick={() => Navigator("/singleproductsui", { state: { product }})} className="veggie-card" key={product._id}>
               <img
                 src={product.productImages}
                 alt={product.productName}

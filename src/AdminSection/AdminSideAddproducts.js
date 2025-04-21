@@ -6,6 +6,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import axios from "axios";
 
 function AdminSideAddproducts() {
+    
     const [formData, setFormData] = useState({
         productName: "",
         descriptionText: "",
