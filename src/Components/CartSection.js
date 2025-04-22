@@ -1,28 +1,77 @@
 import "../Css-Code/CartSectionCSS.css";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
-import CrossPNG from "../Assets/remove.png";
+import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function CartSection() {
   const Navigator = useNavigate();
   const [cartItems, setCartItems] = useState([]);
+  console.log(cartItems, "finalCartSection")
 
+  /* If CartSection page Load then I will get cart in localStorage.
+  IF data is available we will save cartItems useState rether then
+  If data is not present we get empty array */
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
   }, []);
 
+
+  /* When the delete button is clicked, it filters (removes) the item from the cart using its _id.
+  Then it saves the updated cart back to localStorage and updates the UI using setCartItems(). */
   const removeFromCart = (id) => {
     const updatedCart = cartItems.filter((item) => item._id !== id);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
   };
 
+  // The purpose of `reduce()` is to calculate the total of all items.
+  // `toFixed(2)` means rounding off the number to 2 decimal places (e.g., 17.599 ➝ 17.60).
+  /* The price and tax are being added together.
+    Important:** Tax is a string (because of `.toFixed()`), so it's converted to a number using `parseFloat(tax)`.
+    he final total is also rounded using `.toFixed(2)`. 
+  */
   const price = cartItems.reduce((acc, item) => acc + item.productprice * item.quantity, 0);
   const tax = (price * 0.02).toFixed(2);
   const total = (price + parseFloat(tax)).toFixed(2);
+
+  const cartItemsHandler = async () => {
+
+    const userId = localStorage.getItem("userLoginUserId") || localStorage.getItem("userSignupUserid");
+    console.log(userId)
+
+    const combinedData = {
+      userId,
+      products: cartItems.map((item) => ({
+        name: item.productName,
+        price: item.productprice,
+        quantity: item.quantity,
+        image: item.productImages,
+        productId: item._id,
+      })),
+    };
+    console.log(combinedData, "CombinedData")
+
+    try{
+      const cartResponse = await axios.post(`http://localhost:4000/api/v1/cartItemsAdd/cartItemAdd`,
+       combinedData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+
+      console.log(cartResponse, "cartResponseFrontend")
+      toast.success("Item added in backend!")
+      
+    }catch(error){
+      console.log(error.message)
+      toast.error("Cart Item aren't adding")
+    }
+  }
 
   return (
     <div>
@@ -70,12 +119,9 @@ function CartSection() {
                   </div>
                 </div>
                 <div className="subtotal">₹{item.productprice * item.quantity}</div>
-                <img
-                  src={CrossPNG}
-                  alt="remove"
-                  className="removeIMG"
-                  onClick={() => removeFromCart(item._id)}
-                />
+                <div onClick={() => removeFromCart(item._id)}>
+                  <button className="removeIMG"><MdDeleteForever/></button>
+                </div>
               </div>
             ))}
           </div>
@@ -122,7 +168,7 @@ function CartSection() {
             <span>₹{total}</span>
           </div>
 
-          <button className="place-order">Place Order</button>
+          <button onClick={cartItemsHandler} className="place-order">Place Order</button>
         </div>
       </div>
     </div>

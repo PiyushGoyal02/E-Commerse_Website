@@ -23,9 +23,9 @@
 }
 
 .item-left{
-    display: flex;
-    align-items: center;
-    /* gap: 10px; */
+  display: flex;
+  align-items: center;
+  /* gap: 10px; */
 }
 
 .cart-item {
@@ -72,15 +72,25 @@
 }
 
 .removeIMG {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.removeIMG:hover {
-  transform: scale(1.2);
-  cursor: pointer;
+.removeIMG svg {
+  color: #e74c3c;
+  font-size: 25px;
+  transition: transform 0.2s ease-in-out;
 }
+
+.removeIMG:hover svg {
+  transform: scale(1.2);
+}
+
 
 .qtySelect {
   padding: 3px 10px;

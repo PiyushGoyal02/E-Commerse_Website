@@ -4,6 +4,7 @@ import Footer from "./Footer.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function AllProductsUI() {
   const Navigator = useNavigate();
@@ -36,7 +37,7 @@ function AllProductsUI() {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product added to cart!");
+    toast.success("Product added to cart!");
   };
 
   return (
