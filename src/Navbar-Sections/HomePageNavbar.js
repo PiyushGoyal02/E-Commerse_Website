@@ -51,8 +51,8 @@ function HomePageNavbar() {
 
                 {/* Cart and Profile */}
                 <div className="icons-section">
-                    <div onClick={() => Navigator("/cartsection")} className="cart-icon">
-                        <AiOutlineShoppingCart />
+                    <div className="cart-icon">
+                        <AiOutlineShoppingCart onClick={() => Navigator("/cartsection")}/>
                         <span className="cart-count">0</span>
                     </div>
                     <div>

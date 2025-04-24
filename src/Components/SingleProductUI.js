@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom"
 import "../Css-Code/SingleProductUICSS.css"
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar"
 import Footer from "./Footer"
+import toast from "react-hot-toast";
 
 function SingleProductUI () {
 
@@ -9,6 +10,19 @@ function SingleProductUI () {
     const product = location.state
     const productData = product.product
     console.log(productData)
+
+    const addToCartItem = (product) => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const isExist = cart.find(item => item._id === product._id);
+
+        if (isExist) {
+            isExist.quantity = +1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        toast.success(`${product.productName} added to cart!`);
+    }
 
     return (
         <div>
@@ -56,7 +70,7 @@ function SingleProductUI () {
                         </div>
 
                         <div className="TwoButtonsDiv">
-                            <button className="ButtonAddtoCart">Add to cart</button>
+                            <button onClick={() => addToCartItem(productData)} className="ButtonAddtoCart">Add to cart</button>
                             <button className="ButNowButton">Buy now</button>
                         </div>
                     </div>

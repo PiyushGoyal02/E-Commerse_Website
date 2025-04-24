@@ -8,6 +8,7 @@ import UserLoginSignupNavbar from "../Navbar-Sections/UserLoginSignupNavbar";
 
 const UserLoginSignup = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
 
   // It's Login and Signup Panel Active useState
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -35,6 +36,7 @@ const UserLoginSignup = () => {
   // Sign up Section APIs
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const res = await axios.post(`http://localhost:4000/api/v1/signup/signup`, SignUp, {
         headers: { "Content-Type": "application/json" },
@@ -48,6 +50,7 @@ const UserLoginSignup = () => {
       toast.success("Signup successful!");
       navigate("/homepage");
 
+      setLoading(false)
       try{
         const emailResponse = await axios.post(`http://localhost:4000/api/v1/mailSend/sendMail`, email, {
           headers: { "Content-Type": "application/json" },
@@ -68,6 +71,7 @@ const UserLoginSignup = () => {
   // Login Section APIs
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const res = await axios.post(`http://localhost:4000/api/v1/login/login`, LogIn, {
         headers: { "Content-Type": "application/json" },
@@ -78,6 +82,7 @@ const UserLoginSignup = () => {
 
       toast.success("Login successful!");
       navigate("/homepage");
+      setLoading(false)
     } catch (error) {
       toast.error(error.message || "Login failed!");
     }
@@ -105,7 +110,7 @@ const UserLoginSignup = () => {
             </select>
             <input className="input-field" type="email" name="email" placeholder="Email" value={SignUp.email} onChange={ValueChange} required />
             <input className="input-field" type="password" name="password" placeholder="Password" value={SignUp.password} onChange={ValueChange} required />
-            <button className="btn" type="submit">Sign Up</button>
+            <button className="btn" type="submit">{loading === true ? "Loading.." : "Signup"}</button>
           </form>
         </div>
 
@@ -122,7 +127,7 @@ const UserLoginSignup = () => {
             <input className="input-field" type="email" name="email" placeholder="Email" value={LogIn.email} onChange={LoginValueChange} required />
             <input className="input-field" type="password" name="password" placeholder="Password" value={LogIn.password} onChange={LoginValueChange} required />
             <div className="forgot-link">Forgot your password?</div>
-            <button className="btn" type="submit">Sign In</button>
+            <button className="btn" type="submit">{loading === true ? "Loading..." : "Signin"}</button>
           </form>
         </div>
 

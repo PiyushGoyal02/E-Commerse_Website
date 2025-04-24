@@ -6,6 +6,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import axios from "axios";
 
 function AdminSideAddproducts() {
+    const [loading, setLoading] = useState(false);
     
     const [formData, setFormData] = useState({
         productName: "",
@@ -54,6 +55,7 @@ function AdminSideAddproducts() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
 
         if (!formData.productName || !formData.productprice || !formData.productImage) {
             toast.error("Please fill all required fields!");
@@ -80,6 +82,7 @@ function AdminSideAddproducts() {
             );
             console.log(response.data);
             toast.success("Your Product Successfully Added");
+            setLoading(false)
         } catch (error) {
             console.error(error.response?.data || error.message);
             toast.error("Your Product Was Not Added");
@@ -196,7 +199,7 @@ function AdminSideAddproducts() {
 
                     <div className="buttonDiv">
                         <button className="AddButton" type="submit">
-                            Add
+                            {loading === true ? "Loading.." : "Add"}
                         </button>
                     </div>
                 </form>

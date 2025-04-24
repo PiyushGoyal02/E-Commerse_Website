@@ -37,7 +37,7 @@ function AllProductsUI() {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success("Product added to cart!");
+    toast.success(`${product.productName} added to cart!`);
   };
 
   return (

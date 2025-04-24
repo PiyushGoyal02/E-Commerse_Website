@@ -6,71 +6,18 @@ import Bread from "../Assets/bakery.jpg";
 import Colddrink from "../Assets/JuiceBottels.jpeg";
 import Maggie from "../Assets/Maggie.webp";
 import Pluces from "../Assets/PlucesAndGrain.webp";
-import Patato from "../Assets/Patato.jpg";
-import Spinach from "../Assets/Spinach.jpg";
-import Tamato from "../Assets/Tamato.jpg";
-import Onion from "../Assets/Onion.jpg";
-import Carrote from "../Assets/Carrote.jpg";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
 import HomepageSlideImages from "./HomepageSlideImages";
 import Footer from "./Footer";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import HappyFamilyImage from "../Assets/HappyFresh_ecommerce_TEM1332_theedgemarkets.webp";
+import toast from "react-hot-toast";
 
 function HomePage() {
 
   // This Images for Categories UI
   const Images = [Vegetables, Fruits, Colddrink, Maggie, Bread, Milk, Pluces];
-
-  // // This veggies Array for Single Slide Products
-  // const veggies = [
-  //   {
-  //     id: 1,
-  //     name: "Potato 500g",
-  //     image: Patato,
-  //     category: "Vegetables",
-  //     rating: 4,
-  //     price: 35,
-  //     originalPrice: 40,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Tomato 1kg",
-  //     image: Tamato,
-  //     category: "Vegetables",
-  //     rating: 5,
-  //     price: 28,
-  //     originalPrice: 30,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Carrot 500g",
-  //     image: Carrote,
-  //     category: "Vegetables",
-  //     rating: 4,
-  //     price: 44,
-  //     originalPrice: 50,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Spinach 500g",
-  //     image: Spinach,
-  //     category: "Vegetables",
-  //     rating: 4,
-  //     price: 15,
-  //     originalPrice: 18,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Onion 500g",
-  //     image: Onion,
-  //     category: "Vegetables",
-  //     rating: 5,
-  //     price: 45,
-  //     originalPrice: 50,
-  //   },
-  // ];
 
   const [products, setProducts] = useState([]);
 
@@ -90,6 +37,21 @@ function HomePage() {
     fetchProducts();
   }, []);
 
+  const addToCartItem = (product) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const isExist = cart.find(item => item._id === product._id);
+
+    if (isExist) {
+      isExist.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success(`${product.productName} added to cart!`);
+  }
+
+  console.log(addToCartItem)
+
   return (
     <div className="HomePageMainDiv">
       <HomePageNavbar />
@@ -102,7 +64,7 @@ function HomePage() {
 
         <div className="Images-SectionDiv">
           {Images.map((image, index) => (
-            <img className="Images" key={index} src={image} />
+            <img className="Images" key={index} src={image} alt="ImagesForCategouries"/>
           ))}
         </div>
 
@@ -123,7 +85,7 @@ function HomePage() {
                   <span className="new">${veg.productprice}</span>
                   <span className="old">${parseInt(veg.productprice) + 20}</span>
                 </div>
-                <button className="add-btn">🛒 Add</button>
+                <button onClick={() => addToCartItem(veg)} className="add-btn">🛒 Add</button>
               </div>
             ))}
           </div>
@@ -131,7 +93,7 @@ function HomePage() {
       </div>
 
       <div className="happyFamilyImageDiv">
-        <img src={HappyFamilyImage} className="HappyFamilyImage" />
+        <img src={HappyFamilyImage} className="HappyFamilyImage" alt="HappyFamily"/>
       </div>
 
       <div className="newsletter-container">

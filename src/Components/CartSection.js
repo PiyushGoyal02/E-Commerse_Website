@@ -72,6 +72,7 @@ function CartSection() {
       toast.error("Cart Item aren't adding")
     }
   }
+  
 
   return (
     <div>
