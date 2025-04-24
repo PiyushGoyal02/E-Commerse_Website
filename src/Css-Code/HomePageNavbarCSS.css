@@ -114,6 +114,27 @@
   cursor: pointer;
 }
 
+.SellerButton {
+  background-color: #fff;
+  border: 2px solid #dadada;
+  border-radius: 10%;
+  height: 30px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.SellerButton:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transform: scale(1.05);
+}
+
+
 
 
 /* After Click Profile Button and show a box CSS Code */

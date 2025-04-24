@@ -35,6 +35,7 @@ function HomePageNavbar() {
                 {/* Center Navigation + Search */}
                 <div className="Options-SearchBar">
                     <div className="options-bar">
+                        <button onClick={() => Navigator('/adminloginsignup')} className="SellerButton">Seller Side</button>
                         <p onClick={() => Navigator('/homepage')}>Home</p>
                         <p onClick={() => Navigator('/allproductsui')}>All Product</p>
                         <p onClick={() => Navigator('/aboutUs')}>About Us</p>

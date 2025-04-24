@@ -8,9 +8,14 @@ import UserLoginSignupNavbar from "../Navbar-Sections/UserLoginSignupNavbar";
 
 const UserLoginSignup = () => {
   const navigate = useNavigate();
+
+  // It's Login and Signup Panel Active useState
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
 
+  // This is Login form useState
   const [LogIn, setLogIn] = useState({ email: "", password: "" });
+
+  // This is Signup form useState
   const [SignUp, setSignUp] = useState({
     name: "",
     surname: "",
@@ -19,9 +24,11 @@ const UserLoginSignup = () => {
     password: "",
   });
 
+  // This is for get value Signup form and set whole value in setSignup useState
   const ValueChange = (e) =>
     setSignUp((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
+  // This is for get value Login form and set whole value in setLogIn useState
   const LoginValueChange = (e) =>
     setLogIn((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -32,12 +39,27 @@ const UserLoginSignup = () => {
       const res = await axios.post(`http://localhost:4000/api/v1/signup/signup`, SignUp, {
         headers: { "Content-Type": "application/json" },
       });
+
+      const email = res.data.user.email
       const userSignupUserid = res.data.user._id;
+      
       console.log(userSignupUserid)
       localStorage.setItem("userSignupUserid", userSignupUserid);
-
       toast.success("Signup successful!");
       navigate("/homepage");
+
+      try{
+        const emailResponse = await axios.post(`http://localhost:4000/api/v1/mailSend/sendMail`, email, {
+          headers: { "Content-Type": "application/json" },
+        })
+
+        console.log(emailResponse)
+        toast.success("Email sent successful")
+
+      }catch(error){
+        console.log(error.message)
+        toast.error("Email Not Send")
+      }
     } catch (error) {
       toast.error(error.message || "Signup failed!");
     }

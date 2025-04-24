@@ -63,7 +63,6 @@ function ProfileDetails() {
     }
   };
 
-
   return (
     <div className="pd-page-wrapper">
       <HomePageNavbar />

@@ -12,7 +12,7 @@ function AdminLoginSigup() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
 
   // Login And Signup useState
-  const [LogIn, setLogIn] = useState({ email: "", password: "" });
+  const [LogIn, setLogIn] = useState({ email: "goyalp3542@gmail.com", password: "1212" });
   const [SignUp, setSignUp] = useState({
     name: "",
     surname: "",
