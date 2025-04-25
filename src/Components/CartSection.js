@@ -63,9 +63,9 @@ function CartSection() {
           headers: { "Content-Type": "application/json" },
         }
       )
-
       console.log(cartResponse, "cartResponseFrontend")
       toast.success("Item added in backend!")
+
       
     }catch(error){
       console.log(error.message)

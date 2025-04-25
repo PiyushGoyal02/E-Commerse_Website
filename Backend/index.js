@@ -28,12 +28,16 @@ const allUsersDetails = require("./Routes/getAllUserDataRoute")
 const getAllproducts = require("./Routes/getAllProductsRoute")
 const cartItems = require("./Routes/CartItemRoute")
 const sendMail = require("./Routes/MailerRoute")
+const getCartData = require("./Routes/getAllCartDataRoute")
+const placeOrder = require("./Routes/PlaceOrderRoute")
 
+app.use("/api/v1/placeOrder", placeOrder)
+app.use("/api/v1/getCartData", getCartData)
 app.use("/api/v1/mailSend", sendMail)
 app.use("/api/v1/cartItemsAdd", cartItems)
 app.use("/api/v1/getAllProductsDetails", getAllproducts)
 app.use("/api/v1/getAllusersData", allUsersDetails)
-app.use("/api/v1/signup", authRoute);
+app.use("/api/v1/signup", authRoute)
 app.use("/api/v1/login", authRoute)
 app.use("/api/v1/profileDetails",profileDetails)
 
