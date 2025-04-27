@@ -50,8 +50,6 @@ function HomePage() {
     toast.success(`${product.productName} added to cart!`);
   }
 
-  console.log(addToCartItem)
-
   return (
     <div className="HomePageMainDiv">
       <HomePageNavbar />

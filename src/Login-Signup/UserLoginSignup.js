@@ -49,8 +49,9 @@ const UserLoginSignup = () => {
       localStorage.setItem("userSignupUserid", userSignupUserid);
       toast.success("Signup successful!");
       navigate("/homepage");
-
       setLoading(false)
+
+      // This API for Email sendar
       try{
         const emailResponse = await axios.post(`http://localhost:4000/api/v1/mailSend/sendMail`, email, {
           headers: { "Content-Type": "application/json" },
@@ -77,8 +78,10 @@ const UserLoginSignup = () => {
         headers: { "Content-Type": "application/json" },
       });
       const userLoginUserId = res.data.user._id;
-      console.log(userLoginUserId)
       localStorage.setItem("userLoginUserId", userLoginUserId);
+      const UserLoginAddress = res.data.user.address
+      console.log(UserLoginAddress)
+      localStorage.setItem("AfterLoginUserAddress", UserLoginAddress)
 
       toast.success("Login successful!");
       navigate("/homepage");

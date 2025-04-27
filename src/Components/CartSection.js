@@ -10,39 +10,34 @@ import axios from "axios";
 function CartSection() {
   const Navigator = useNavigate();
   const [cartItems, setCartItems] = useState([]);
-  console.log(cartItems, "finalCartSection")
-
-  /* If CartSection page Load then I will get cart in localStorage.
-  IF data is available we will save cartItems useState rether then
-  If data is not present we get empty array */
+  const [paymentMethod, setPaymentMethod] = useState({ paymentValue: "" });
+  
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
   }, []);
 
-
-  /* When the delete button is clicked, it filters (removes) the item from the cart using its _id.
-  Then it saves the updated cart back to localStorage and updates the UI using setCartItems(). */
   const removeFromCart = (id) => {
     const updatedCart = cartItems.filter((item) => item._id !== id);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
+    toast.success("Removed from cart");
   };
 
-  // The purpose of `reduce()` is to calculate the total of all items.
-  // `toFixed(2)` means rounding off the number to 2 decimal places (e.g., 17.599 ➝ 17.60).
-  /* The price and tax are being added together.
-    Important:** Tax is a string (because of `.toFixed()`), so it's converted to a number using `parseFloat(tax)`.
-    he final total is also rounded using `.toFixed(2)`. 
-  */
   const price = cartItems.reduce((acc, item) => acc + item.productprice * item.quantity, 0);
   const tax = (price * 0.02).toFixed(2);
   const total = (price + parseFloat(tax)).toFixed(2);
 
+  const AfterLoginUserAddress = localStorage.getItem("AfterLoginUserAddress");
+  
   const cartItemsHandler = async () => {
+    if (!AfterLoginUserAddress || AfterLoginUserAddress === "No address available") {
+      toast.error("Please add your address before placing the order!");
+      Navigator("/profiledetails");
+      return;
+    }
 
     const userId = localStorage.getItem("userLoginUserId") || localStorage.getItem("userSignupUserid");
-    console.log(userId)
 
     const combinedData = {
       userId,
@@ -53,31 +48,71 @@ function CartSection() {
         image: item.productImages,
         productId: item._id,
       })),
+      totalAmount: total,
     };
-    console.log(combinedData, "CombinedData")
 
-    try{
-      const cartResponse = await axios.post(`http://localhost:4000/api/v1/cartItemsAdd/cartItemAdd`,
-       combinedData,
-        {
+
+    try {
+      // Add cart items to the backend
+      const cartResponse = await axios.post(`http://localhost:4000/api/v1/cartItemsAdd/cartItemAdd`, combinedData, {
+        headers: { "Content-Type": "application/json" },
+      });
+      const CartId = cartResponse.data.data._id
+
+      toast.success("Cart item successfully added!");
+
+      console.log(cartItems)
+
+      // Prepare order payload
+      const orderPayload = {
+        userId,
+        cartId: CartId,  
+        cartItems: cartItems.map(item => ({
+          productId: item._id,
+          quantity: item.quantity,
+          productName: item.productName,
+          productPrice: item.productprice
+        })),
+        totalAmount: total,
+        address: AfterLoginUserAddress,  
+        payment: {
+          method: paymentMethod.paymentValue === "Cash On Delivery" ? "COD" : paymentMethod.paymentValue,
+        },
+      };
+
+      try{
+
+        const orderResponse = await axios.post(`http://localhost:4000/api/v1/placeOrder/placeOrder`, orderPayload, {
           headers: { "Content-Type": "application/json" },
-        }
-      )
-      console.log(cartResponse, "cartResponseFrontend")
-      toast.success("Item added in backend!")
+        });
+        console.log(orderResponse, "orderResponse")
+        toast.success("Order placed successfully!");
+        localStorage.removeItem("cart");
+        setCartItems([]);
+
+      }catch(error){
+        console.log(error.message)
+        toast.error("Your order not confimed")
+      }
 
       
-    }catch(error){
-      console.log(error.message)
-      toast.error("Cart Item aren't adding")
+    } catch (error) {
+      console.log(error.message);
+      toast.error("An error occurred. Please try again!");
     }
-  }
-  
+  };
+
+  const paymentMethodHandler = (e) => {
+    e.preventDefault();
+    setPaymentMethod((prev) => ({
+      ...prev,
+      paymentValue: e.target.value,
+    }));
+  };
 
   return (
     <div>
       <HomePageNavbar />
-
       <div className="shopping-container">
         <div className="cart">
           <h2>
@@ -112,8 +147,8 @@ function CartSection() {
                       }}
                     >
                       {[...Array(10).keys()].map((num) => (
-                        <option key={num} value={num}>
-                          {num}
+                        <option key={num} value={num + 1}>
+                          {num + 1}
                         </option>
                       ))}
                     </select>
@@ -121,7 +156,7 @@ function CartSection() {
                 </div>
                 <div className="subtotal">₹{item.productprice * item.quantity}</div>
                 <div onClick={() => removeFromCart(item._id)}>
-                  <button className="removeIMG"><MdDeleteForever/></button>
+                  <button className="removeIMG"><MdDeleteForever /></button>
                 </div>
               </div>
             ))}
@@ -140,12 +175,21 @@ function CartSection() {
 
           <div className="row">
             <p>DELIVERY ADDRESS</p>
-            <span className="change">Change</span>
+            <span onClick={() => Navigator("/profiledetails")} className="change">Change</span>
           </div>
-          <p className="gray">No address found</p>
+
+          <div className="AddressUI">
+            <p>{AfterLoginUserAddress}</p>
+          </div>
 
           <p className="bold">PAYMENT METHOD</p>
-          <select className="Cash-UPI-Card-Dropdown">
+          <select
+            required
+            onChange={paymentMethodHandler}
+            value={paymentMethod.paymentValue}
+            name="paymentValue"
+            className="Cash-UPI-Card-Dropdown"
+          >
             <option>Cash On Delivery</option>
             <option>Credit/Debit Card</option>
             <option>UPI ID</option>

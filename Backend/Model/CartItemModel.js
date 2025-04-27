@@ -6,16 +6,19 @@ const cartItemSchema = new mongoose.Schema({
     },
     products: [
         {
-        name: String,
-        price: Number,
-        quantity: {
-            type: Number,
-            default: 1,
-        },
-        productId: String,
-        image: String,
+            name: String,
+            price: Number,
+            quantity: {
+                type: Number,
+                default: 1,
+            },
+            productId: String,
+            image: String,
         },
     ],
+    totalAmount: {
+        type: Number,
+    },
 });
 
 module.exports = mongoose.model("CartItem", cartItemSchema);
