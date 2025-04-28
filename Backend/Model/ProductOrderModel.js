@@ -34,6 +34,9 @@ const productOrder = new mongoose.Schema(
     address: {
       type: String,
     },
+    razorpayOrderId: {
+      type: String
+    },
     orderAt: {
       type: Date,
       default: Date.now,

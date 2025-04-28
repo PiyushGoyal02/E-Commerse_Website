@@ -19,14 +19,6 @@ exports.placeOrder = async (req, res) => {
       });
     }
 
-    // Ensure cartId is a string (if it's an array, you might need to handle this differently)
-    // if (Array.isArray(cartId)) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "cartId should be a string, not an array.",
-    //   });
-    // }
-
     const amountInPaise = Math.round(totalAmount * 100);  // Convert to paise and round
 
     // Create Razorpay order

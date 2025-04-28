@@ -31,76 +31,95 @@ function CartSection() {
   const AfterLoginUserAddress = localStorage.getItem("AfterLoginUserAddress");
   
   const cartItemsHandler = async () => {
-    if (!AfterLoginUserAddress || AfterLoginUserAddress === "No address available") {
-      toast.error("Please add your address before placing the order!");
-      Navigator("/profiledetails");
-      return;
-    }
+  if (!AfterLoginUserAddress || AfterLoginUserAddress === "No address available") {
+    toast.error("Please add your address before placing the order!");
+    Navigator("/profiledetails");
+    return;
+  }
 
-    const userId = localStorage.getItem("userLoginUserId") || localStorage.getItem("userSignupUserid");
+  const userId = localStorage.getItem("userLoginUserId") || localStorage.getItem("userSignupUserid");
 
-    const combinedData = {
+  const combinedData = {
+    userId,
+    products: cartItems.map((item) => ({
+      name: item.productName,
+      price: item.productprice,
+      quantity: item.quantity,
+      image: item.productImages,
+      productId: item._id,
+    })),
+    totalAmount: total,
+  };
+
+  try {
+    const cartResponse = await axios.post("http://localhost:4000/api/v1/cartItemsAdd/cartItemAdd", combinedData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    const CartId = cartResponse.data.data._id;
+
+    const orderPayload = {
       userId,
-      products: cartItems.map((item) => ({
-        name: item.productName,
-        price: item.productprice,
-        quantity: item.quantity,
-        image: item.productImages,
+      cartId: CartId,
+      cartItems: cartItems.map(item => ({
         productId: item._id,
+        quantity: item.quantity,
+        productName: item.productName,
+        productPrice: item.productprice
       })),
       totalAmount: total,
+      address: AfterLoginUserAddress,
+      payment: {
+        method: paymentMethod.paymentValue === "Cash On Delivery" ? "COD" : paymentMethod.paymentValue,
+      },
     };
 
+    console.log(process.env.REACT_APP_RAZORPAY_KEY_ID, "Rezorpay_ID")
 
-    try {
-      // Add cart items to the backend
-      const cartResponse = await axios.post(`http://localhost:4000/api/v1/cartItemsAdd/cartItemAdd`, combinedData, {
-        headers: { "Content-Type": "application/json" },
-      });
-      const CartId = cartResponse.data.data._id
+    const orderResponse = await axios.post("http://localhost:4000/api/v1/placeOrder/placeOrder", orderPayload, {
+      headers: { "Content-Type": "application/json" },
+    });
 
-      toast.success("Cart item successfully added!");
+    const { razorpayOrderId, amount } = orderResponse.data;
+    console.log(razorpayOrderId)
+    console.log(amount)
 
-      console.log(cartItems)
-
-      // Prepare order payload
-      const orderPayload = {
-        userId,
-        cartId: CartId,  
-        cartItems: cartItems.map(item => ({
-          productId: item._id,
-          quantity: item.quantity,
-          productName: item.productName,
-          productPrice: item.productprice
-        })),
-        totalAmount: total,
-        address: AfterLoginUserAddress,  
-        payment: {
-          method: paymentMethod.paymentValue === "Cash On Delivery" ? "COD" : paymentMethod.paymentValue,
+    if (paymentMethod.paymentValue === "Cash On Delivery") {
+      toast.success("Order placed with COD!");
+      localStorage.removeItem("cart");
+      setCartItems([]);
+    } else {
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,  // Replace with your actual Razorpay Key ID
+        amount: amount * 100,  // Amount in paise
+        currency: "INR",
+        order_id: razorpayOrderId,
+        name: "Green Market",
+        description: "Order Payment",
+        handler: function (response) {
+          toast.success("Payment Successful!");
+          localStorage.removeItem("cart");
+          setCartItems([]);
+          // Ideally, call backend to verify payment here
         },
+        prefill: {
+          name: "Customer Name",
+          email: "customer@example.com",
+          contact: "9896787236"
+        },
+        theme: {
+          color: "#3399cc"
+        }
       };
-
-      try{
-
-        const orderResponse = await axios.post(`http://localhost:4000/api/v1/placeOrder/placeOrder`, orderPayload, {
-          headers: { "Content-Type": "application/json" },
-        });
-        console.log(orderResponse, "orderResponse")
-        toast.success("Order placed successfully!");
-        localStorage.removeItem("cart");
-        setCartItems([]);
-
-      }catch(error){
-        console.log(error.message)
-        toast.error("Your order not confimed")
-      }
-
-      
-    } catch (error) {
-      console.log(error.message);
-      toast.error("An error occurred. Please try again!");
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
     }
-  };
+
+  } catch (error) {
+    console.log(error.message);
+    toast.error("An error occurred. Please try again!");
+  }
+};
+
 
   const paymentMethodHandler = (e) => {
     e.preventDefault();
