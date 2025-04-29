@@ -1,10 +1,12 @@
 import "../Css-Code/HomePageNavbarCSS.css";
 import ECommersImage from "../Assets/E-CommersShooping.png";
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaBars, FaTimes } from 'react-icons/fa';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import PersonImage from "../Assets/1724930.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { CgMenuRightAlt } from "react-icons/cg";
+import { RxCross2 } from "react-icons/rx";
 
 function HomePageNavbar() {
 
@@ -12,6 +14,12 @@ function HomePageNavbar() {
 
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);  // Connect with HTML elememt
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    // Toggle menu open/close
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -25,48 +33,83 @@ function HomePageNavbar() {
     }, []);
 
     return (
-        <div className="Navbar-Section">
-            {/* Logo */}
-            <div onClick={() => Navigator('/homepage')}>
-                <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
-            </div>
+        <div>
 
-            <div className="OptionBar-SearchBar-Icons">
-                {/* Center Navigation + Search */}
-                <div className="Options-SearchBar">
-                    <div className="options-bar">
-                        <button onClick={() => Navigator('/adminloginsignup')} className="SellerButton">Seller Side</button>
-                        <p onClick={() => Navigator('/homepage')}>Home</p>
-                        <p onClick={() => Navigator('/allproductsui')}>All Product</p>
-                        <p onClick={() => Navigator('/aboutUs')}>About Us</p>
+            <div className="homeNavbarForWebsite">
+                <div className="Navbar-Section">
+                    {/* Logo */}
+                    <div onClick={() => Navigator('/homepage')}>
+                        <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
                     </div>
 
-                    <div className="search-bar">
-                        <input type="text" placeholder="Search products" />
-                        <button type="submit">
-                            <FaSearch />
+                    <div className="OptionBar-SearchBar-Icons">
+                        {/* Center Navigation + Search */}
+                        <div className="Options-SearchBar">
+                            <div className="options-bar">
+                                <button onClick={() => Navigator('/adminloginsignup')} className="SellerButton">Seller Side</button>
+                                <p onClick={() => Navigator('/homepage')}>Home</p>
+                                <p onClick={() => Navigator('/allproductsui')}>All Product</p>
+                                <p onClick={() => Navigator('/aboutUs')}>About Us</p>
+                            </div>
+
+                            <div className="search-bar">
+                                <input type="text" placeholder="Search products" />
+                                <button type="submit">
+                                    <FaSearch />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Cart and Profile */}
+                        <div className="icons-section">
+                            <div className="cart-icon">
+                                <AiOutlineShoppingCart onClick={() => Navigator("/cartsection")}/>
+                                <span className="cart-count">0</span>
+                            </div>
+                            <div>
+                                <img onClick={() => setOpen(!open)} src={PersonImage} className="PersonImage" alt="User" />
+                            </div>
+                        </div>
+                    </div>
+
+                    {open && (
+                        <div className="dropdown-menu">
+                            <button onClick={() => Navigator('/profiledetails')}>Profile</button>
+                            <button onClick={() => Navigator('/')}>Logout</button>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Mobile Phone */}
+            <div className="HomeNavbarForMobilephone">
+                <div className="Navbar-Section">
+                    {/* Logo */}
+                    <div onClick={() => Navigator('/homepage')}>
+                        <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
+                    </div>
+
+                    <div className="menu-button" onClick={toggleMenu}>
+                        <CgMenuRightAlt />
+                    </div>
+
+                    <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
+                        <button className="close-button" onClick={toggleMenu}>
+                            <RxCross2 />
                         </button>
-                    </div>
-                </div>
 
-                {/* Cart and Profile */}
-                <div className="icons-section">
-                    <div className="cart-icon">
-                        <AiOutlineShoppingCart onClick={() => Navigator("/cartsection")}/>
-                        <span className="cart-count">0</span>
+                        <div className="textNavigatorDiv">
+                            <p className="textNavigator" onClick={() => Navigator('/homepage')}>Home</p>
+                            <p className="textNavigator" onClick={() => Navigator('/profiledetails')}>Profile</p>
+                            <p className="textNavigator" onClick={() => Navigator('/allproductsui')}>All Product</p>
+                            <p className="textNavigator" onClick={() => Navigator('/aboutUs')}>About Us</p>
+                            <p className="textNavigator" onClick={() => Navigator('/')}>Logout</p>
+                            <p className="textNavigator" onClick={() => Navigator('/adminloginsignup')}>Seller Side</p>
+                        </div>
                     </div>
-                    <div>
-                        <img onClick={() => setOpen(!open)} src={PersonImage} className="PersonImage" alt="User" />
-                    </div>
+
                 </div>
             </div>
-
-            {open && (
-                <div className="dropdown-menu">
-                    <button onClick={() => Navigator('/profiledetails')}>Profile</button>
-                    <button onClick={() => Navigator('/')}>Logout</button>
-                </div>
-            )}
         </div>
     );
 }
