@@ -1,3 +1,11 @@
+.SingleProductUiForMobilePhone{
+    display: none;
+}
+
+.SingleProductUiForWebsite{
+    display: block;
+}
+
 .ProductContentDiv{
     padding: 100px;
 }
@@ -126,4 +134,14 @@
     background-color: #43a047;
     transform: scale(1.03);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .SingleProductUiForMobilePhone{
+        display: block;
+    }
+
+    .SingleProductUiForWebsite{
+        display: none;
+    }
 }

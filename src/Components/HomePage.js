@@ -66,30 +66,59 @@ function HomePage() {
           ))}
         </div>
 
-        <div className="veggie-section">
-          <h2>ORGANIC VEGGIES</h2>
-          <div className="veggie-grid">
-            {products.slice(0, 5).map((veg) => (
-              <div className="veggie-card" key={veg.id}>
-                <img src={veg.productImages} alt={veg.productName} />
-                <p className="category">{veg.category}</p>
-                <h3>{veg.productName}</h3>
-                <div className="stars">
-                  {"★".repeat(4)}
-                  {"☆".repeat(1)}
-                  <span className="count">(4)</span>
-                </div>
-                <div className="price">
-                  <span className="new">${veg.productprice}</span>
-                  <span className="old">${parseInt(veg.productprice) + 20}</span>
-                </div>
-                <button onClick={() => addToCartItem(veg)} className="add-btn">🛒 Add</button>
+        <div className="productsForWebsite">
+          <div className="veggie-section">
+              <h2 className="OrganicVeggies">ORGANIC VEGGIES</h2>
+              <div className="veggie-grid">
+                {products.slice(0, 5).map((veg) => (
+                  <div className="veggie-card" key={veg.id}>
+                    <img src={veg.productImages} alt={veg.productName} />
+                    <p className="category">{veg.category}</p>
+                    <h3>{veg.productName}</h3>
+                    <div className="stars">
+                      {"★".repeat(4)}
+                      {"☆".repeat(1)}
+                      <span className="count">(4)</span>
+                    </div>
+                    <div className="price">
+                      <span className="new">${veg.productprice}</span>
+                      <span className="old">${parseInt(veg.productprice) + 20}</span>
+                    </div>
+                    <button onClick={() => addToCartItem(veg)} className="add-btn">🛒 Add</button>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </div>
 
+
+          {/* Only for Mobile Phone UI  */}
+          <div className="productsForMobilePhone">
+            <div className="veggie-section">
+              <h2 className="OrganicVeggies">ORGANIC VEGGIES</h2>
+              <div className="veggie-grid">
+                {products.slice(0, 4).map((veg) => (
+                  <div className="veggie-card" key={veg.id}>
+                    <img src={veg.productImages} alt={veg.productName} />
+                    <p className="category">{veg.category}</p>
+                    <h3>{veg.productName}</h3>
+                    <div className="stars">
+                      {"★".repeat(4)}
+                      {"☆".repeat(1)}
+                      <span className="count">(4)</span>
+                    </div>
+                    <div className="price">
+                      <span className="new">${veg.productprice}</span>
+                      <span className="old">${parseInt(veg.productprice) + 20}</span>
+                    </div>
+                    <button onClick={() => addToCartItem(veg)} className="add-btn">🛒 Add</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
       <div className="happyFamilyImageDiv">
         <img src={HappyFamilyImage} className="HappyFamilyImage" alt="HappyFamily"/>
       </div>

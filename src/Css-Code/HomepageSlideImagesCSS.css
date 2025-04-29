@@ -50,3 +50,21 @@
 .slider-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+
+@media (max-width: 768px) {
+
+  .custom-slider-container {
+    margin-top: 70px;
+  }
+
+  .custom-slider-image {
+    width: 90%;
+    height: 250px;
+    margin-top: 8%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+}
