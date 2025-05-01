@@ -52,7 +52,6 @@
     text-align: start;
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
 
 .ProductsName{
@@ -138,4 +137,89 @@
     border-color: black;
     transition: 0.5s;
     transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+    .MainDivAddProducts {
+        margin: 1%;
+    }
+
+    .productsImages {
+        font-size: 15px;
+        margin-left: 5px;
+    }
+
+    .labelText{
+        font-size: 15px;
+    }
+
+    .singleImageBox {
+        width: 80px;
+        height: 80px;
+        font-size: 13px;
+    }
+
+    .previewImage {
+        width: 90px;
+        height: 100px;
+    }
+
+    .removeBtnImage {
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .LabelInputDiv {
+        gap: 5px;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-left: -42px;
+    }
+
+    .ProductsName,
+    .DescriptionText,
+    .OptionSection {
+        width: 300px;
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .DescriptionText {
+        height: 100px;
+    }
+
+    .Productsprice-Productsquantity-MainDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 55px;
+    }
+
+    .ProdcutsPrice,
+    .ProductsQuantity {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .buttonDiv{
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
+
+    .AddButton{
+        padding: 1%;
+        background-color: #4caf50;
+        border-color: #4caf50;
+        color: white;
+        border-style: none;
+        width: 60px;
+        height: 40px;
+        font-size: 16px;
+        border-radius: 10px;
+        transition: 0.5s;
+    }
 }

@@ -98,8 +98,8 @@ function AdminSideAddproducts() {
                         {!imagePreview ? (
                             <>
                                 <label htmlFor="imageUpload">
-                                    <IoCloudUploadOutline size={30} />
-                                    <p>Upload</p>
+                                    <IoCloudUploadOutline size={18} />
+                                    <p className="Uploadtext">Upload</p>
                                 </label>
                                 <input
                                     type="file"

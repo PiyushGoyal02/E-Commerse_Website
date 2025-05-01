@@ -17,7 +17,9 @@ function AdminHomePage() {
         <div>
             <AdminNavbar />
             <div className="Sidebar-DifferentSections">
-                <div>
+
+                {/* Only for Website */}
+                <div className="AdminNavbarForWebsite">
                     <div className="AdminSidebardiv">
                         <div
                             className={`DivSection ${active === "add" ? "active" : ""}`}
@@ -49,6 +51,39 @@ function AdminHomePage() {
                         >
                             <TbUsersGroup className="Icons" />
                             <p className="Ptag-text">All Users</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Only for Modile Phone */}
+                <div className="AdminNavbarForMobilePhone">
+                    <div className="AdminSidebardiv">
+                        <div
+                            className={`DivSection ${active === "add" ? "active" : ""}`}
+                            onClick={() => setActive("add")}
+                        >
+                            <MdOutlineLibraryAddCheck className="Icons" />
+                        </div>
+
+                        <div
+                            className={`DivSection ${active === "list" ? "active" : ""}`}
+                            onClick={() => setActive("list")}
+                        >
+                            <PiListHeartBold className="Icons" />
+                        </div>
+
+                        <div
+                            className={`DivSection ${active === "order" ? "active" : ""}`}
+                            onClick={() => setActive("order")}
+                        >
+                            <TbCheckbox className="Icons" />
+                        </div>
+
+                        <div
+                            className={`DivSection ${active === "users" ? "active" : ""}`}
+                            onClick={() => setActive("users")}
+                        >
+                            <TbUsersGroup className="Icons" />
                         </div>
                     </div>
                 </div>
