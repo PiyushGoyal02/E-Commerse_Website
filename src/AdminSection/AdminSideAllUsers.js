@@ -6,7 +6,6 @@ function AdminSideAllUsers() {
 
   const [users, setUserDetails] = useState([]);
 
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {

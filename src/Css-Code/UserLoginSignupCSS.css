@@ -224,3 +224,66 @@ form {
 	width: 40px;
 	cursor: pointer;
 }
+
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    padding-top: 80px;
+  }
+
+  .container {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: auto;
+  }
+
+  .form-container,
+  .sign-in-container,
+  .sign-up-container {
+    width: 100% !important;
+    position: relative;
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    z-index: auto !important;
+    animation: none !important;
+  }
+
+  .overlay-container {
+    display: none;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  .btn {
+    padding: 10px 30px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .input-field {
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .heading {
+    font-size: 20px;
+  }
+
+  .text,
+  .small-text,
+  .forgot-link {
+    font-size: 12px;
+  }
+
+  .social-container {
+    margin: 10px 0;
+  }
+
+  .social {
+    margin: 0 5px;
+    font-size: 18px;
+  }
+}

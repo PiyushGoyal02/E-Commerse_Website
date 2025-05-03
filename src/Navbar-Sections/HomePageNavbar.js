@@ -85,12 +85,14 @@ function HomePageNavbar() {
             <div className="HomeNavbarForMobilephone">
                 <div className="Navbar-Section">
                     {/* Logo */}
-                    <div onClick={() => Navigator('/homepage')}>
-                        <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
-                    </div>
+                    <div className="BrandLogoAndMenuIcon">
+                        <div onClick={() => Navigator('/homepage')}>
+                            <img src={ECommersImage} className="navbar-logo" alt="GreenCart Logo" />
+                        </div>
 
-                    <div className="menu-button" onClick={toggleMenu}>
-                        <CgMenuRightAlt />
+                        <div className="menu-button" onClick={toggleMenu}>
+                            <CgMenuRightAlt />
+                        </div>
                     </div>
 
                     <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
