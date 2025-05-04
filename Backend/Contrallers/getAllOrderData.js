@@ -1,24 +1,29 @@
-const orderModel = require("../Model/ProductOrderModel")
+const orderModel = require("../Model/ProductOrderModel");
 
 exports.getOrderData = async (req, res) => {
-    try{
-        const responce = await orderModel.finf({}, '')
+    try {
+        const response = await orderModel.find({}, 'cartItems address totalAmount payment.method orderAt status userId');
 
-        if(!responce){
-            res.status(201).json(
-                {
-                    success: true,
-                    message: ""
-                }
-            )
+        if (!response || response.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: "No orders found",
+                data: []
+            });
         }
-        
-    }catch(error){
-        res.status(501).josn(
-            {
-                success: false,
-                message: ""
-            }
-        )
+
+        res.status(200).json({
+            success: true,
+            message: "Orders fetched successfully",
+            data: response
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Server Error",
+            error: error.message
+        });
     }
 }

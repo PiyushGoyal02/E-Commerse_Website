@@ -14,6 +14,7 @@ function Footer () {
                             <img
                                 src={Logo}
                                 className="Imgaelogo"
+                                alt="ImageLogo"
                             />
                         </div>
 
