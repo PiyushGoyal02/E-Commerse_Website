@@ -2,6 +2,8 @@ const orderModel = require("../Model/ProductOrderModel");
 
 exports.getOrderData = async (req, res) => {
     try {
+
+        //  Get cart items from backend request
         const response = await orderModel.find({}, 'cartItems address totalAmount payment.method orderAt status userId');
 
         if (!response || response.length === 0) {

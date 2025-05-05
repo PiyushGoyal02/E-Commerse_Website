@@ -16,6 +16,7 @@ exports.Signup = async (req, res) => {
       });
     }
 
+    // AccountType Set lowercase
     const normalizedAccountType = accountType.toLowerCase();
 
     // Check for valid accountType
@@ -35,8 +36,10 @@ exports.Signup = async (req, res) => {
       });
     }
 
+    // We are hashing our password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create New User
     const newUser = await UserModel.create({
       name,
       surname,
@@ -44,6 +47,7 @@ exports.Signup = async (req, res) => {
       password: hashedPassword,
       accountType: normalizedAccountType,
     });
+
 
     const payload = {
       id: newUser._id,
@@ -84,8 +88,10 @@ exports.Login = async (req, res) => {
       });
     }
 
+    // Check if user exists
     const user = await UserModel.findOne({ email });
 
+    // Check validation for email and password
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -93,6 +99,7 @@ exports.Login = async (req, res) => {
       });
     }
 
+    // Check if the account type is user
     if (user.accountType !== "user") {
       return res.status(403).json({
         success: false,
@@ -100,6 +107,7 @@ exports.Login = async (req, res) => {
       });
     }
 
+    // Compare password from fom data and backend password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({
@@ -151,6 +159,7 @@ exports.adminLogin = async (req, res) => {
       });
     }
 
+    // Check if admin exists
     const admin = await UserModel.findOne({ email });
 
     if (!admin) {
@@ -160,6 +169,7 @@ exports.adminLogin = async (req, res) => {
       });
     }
 
+    // Check if the account type is admin
     if (admin.accountType !== "admin") {
       return res.status(403).json({
         success: false,
@@ -167,6 +177,7 @@ exports.adminLogin = async (req, res) => {
       });
     }
 
+    // Compare password from for data and backend password
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) {
       return res.status(401).json({

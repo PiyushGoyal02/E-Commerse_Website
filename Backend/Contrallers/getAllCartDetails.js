@@ -2,6 +2,8 @@ const CartModelSchema = require("../Model/CartItemModel");
 
 exports.getCartItemData = async (req, res) => {
   try {
+
+    // Get Userid and products from backend
     const cartData = await CartModelSchema.find({}, 'userId products');
 
     if (!cartData || cartData.length === 0) {
