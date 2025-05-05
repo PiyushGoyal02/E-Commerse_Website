@@ -32,6 +32,7 @@ function AdminSideAddproducts() {
         }));
     }
 
+    // It's a function for image upload
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -53,6 +54,7 @@ function AdminSideAddproducts() {
         }));
     };
 
+    // This is for submit the form on backend APIs call
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true)
@@ -61,7 +63,8 @@ function AdminSideAddproducts() {
             toast.error("Please fill all required fields!");
             return;
         }
-
+        
+        // this is create a new data 
         const data = new FormData();
         data.append("productName", formData.productName);  // append function (this is for add vlaue/value jodna)
         data.append("descriptionText", formData.descriptionText);

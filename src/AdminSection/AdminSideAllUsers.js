@@ -4,6 +4,7 @@ import axios from "axios";
 
 function AdminSideAllUsers() {
 
+  // Set All users data in this useState
   const [users, setUserDetails] = useState([]);
 
   useEffect(() => {

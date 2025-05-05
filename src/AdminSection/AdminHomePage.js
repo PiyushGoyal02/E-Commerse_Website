@@ -11,6 +11,8 @@ import { TbCheckbox, TbUsersGroup } from "react-icons/tb";
 import AdminSideAddproducts from "./AdminSideAddproducts";
 
 function AdminHomePage() {
+
+    // It's Sidebar Action, which Page is Active
     const [active, setActive] = useState("add");
 
     return (
@@ -88,6 +90,7 @@ function AdminHomePage() {
                     </div>
                 </div>
 
+                {/* It's Condistion for left side and right side */}
                 <div className="AdminMainContent">
                     {active === "add" && <AdminSideAddproducts/>}
                     {active === "users" && <AdminSideAllUsers />}

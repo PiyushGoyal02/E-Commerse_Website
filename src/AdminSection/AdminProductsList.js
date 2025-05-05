@@ -4,11 +4,8 @@ import "../AdminSectionCSS/AdminProductsListCSS.css";
 
 function AdminProductsList() {
 
-  // const [checkBoxQuantity, setCheckBoxQuantity] = useState(false)
-  // const Navigator = useNavigate();
   const [product, setProducts] = useState([]);
-
-
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -60,8 +57,9 @@ function AdminProductsList() {
                   <div>
                     <input
                       type="checkbox"
-                      checked={product.productsquantity > 10}   // Auto Toggle If productQuannity Value Ki less then 10 then Toggle Auto OFF and nhi too Toggle ON
-                      readOnly       // It's not manually toggle
+                      checked={product.productsquantity > 10} // If quantity > 10 => ON, else OFF
+                      readOnly // Prevents manual toggling
+
                     />
                     <span className="slider round"></span>
                   </div>
@@ -124,6 +122,3 @@ function AdminProductsList() {
 }
 
 export default AdminProductsList;
-
-{/* <input type="checkbox" defaultChecked={product.stock} />
-<span className="slider round"></span> */}

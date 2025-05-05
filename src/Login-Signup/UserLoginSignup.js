@@ -57,7 +57,7 @@ const UserLoginSignup = () => {
           headers: { "Content-Type": "application/json" },
         })
 
-        console.log(emailResponse)
+        // console.log(emailResponse)
         toast.success("Email sent successful")
 
       }catch(error){

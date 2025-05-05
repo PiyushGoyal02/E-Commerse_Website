@@ -16,6 +16,14 @@ function HomePageNavbar() {
     const dropdownRef = useRef(null);  // Connect with HTML elememt
     const [menuOpen, setMenuOpen] = useState(false);
 
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearch = () => {
+        if (searchTerm.trim()) {
+        Navigator(`/allproductsui?search=${encodeURIComponent(searchTerm.trim())}`);
+        }
+    };
+
     // Toggle menu open/close
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -53,8 +61,18 @@ function HomePageNavbar() {
                             </div>
 
                             <div className="search-bar">
-                                <input type="text" placeholder="Search products" />
-                                <button type="submit">
+                                <input
+                                    type="text"
+                                    placeholder="Search products"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleSearch();
+                                    }
+                                    }}
+                                />
+                                <button type="button" onClick={handleSearch}>
                                     <FaSearch />
                                 </button>
                             </div>

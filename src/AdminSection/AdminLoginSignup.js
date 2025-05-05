@@ -1,14 +1,15 @@
-import "../AdminSectionCSS/AdminLoginSigupCSS.css";
-import AdminNavbar from "../Navbar-Sections/AdminNavbar";
-
 import axios from "axios";
 import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../AdminSectionCSS/AdminLoginSigupCSS.css";
+import AdminNavbar from "../Navbar-Sections/AdminNavbar";
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 
 function AdminLoginSigup() {
   const navigate = useNavigate();
+
+  // For Right Panel Signup New Account
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
 
   // Login And Signup useState
@@ -49,7 +50,7 @@ function AdminLoginSigup() {
         }
       );
       console.log(responceSignup.data);
-      toast.success("Signup successful!");
+      toast.success("Admin Signup successful!");
       navigate("/adminhomepage");
     } catch (error) {
       toast.error(error.message || "Signup failed!");
@@ -68,7 +69,7 @@ function AdminLoginSigup() {
         }
       );
       console.log(responceLogin.data);
-      toast.success("Login successful!");
+      toast.success("Admin Login successful!");
       navigate("/adminhomepage");
     } catch (error) {
       toast.error(error.message || "Login failed!");
@@ -80,7 +81,7 @@ function AdminLoginSigup() {
       <AdminNavbar />
 
       <div
-        className={`container ${
+        className={`container AdminContainer ${
           isRightPanelActive ? "right-panel-active" : ""
         }`}
         id="container"

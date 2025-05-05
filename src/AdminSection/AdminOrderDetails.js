@@ -5,6 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function AdminOrderDetails() {
+
+  // All Order Store in useState
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
