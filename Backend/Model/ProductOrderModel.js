@@ -1,5 +1,19 @@
 const mongoose = require("mongoose");
 
+// Tracking schema
+const trackingSchema = new mongoose.Schema({
+  status: {
+    type: String,
+    enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Order Schema
 const productOrder = new mongoose.Schema(
   {
     userId: {
@@ -29,13 +43,12 @@ const productOrder = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "Pending",
     },
     address: {
       type: String,
     },
     razorpayOrderId: {
-      type: String
+      type: String,
     },
     orderAt: {
       type: Date,
@@ -47,6 +60,7 @@ const productOrder = new mongoose.Schema(
         default: "COD",
       },
     },
+    tracking: [trackingSchema],
   }
 );
 

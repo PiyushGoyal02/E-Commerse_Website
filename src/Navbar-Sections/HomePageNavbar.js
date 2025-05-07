@@ -1,6 +1,6 @@
 import "../Css-Code/HomePageNavbarCSS.css";
 import ECommersImage from "../Assets/E-CommersShooping.png";
-import { FaSearch, FaBars, FaTimes } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import PersonImage from "../Assets/1724930.png";
 import { useNavigate } from "react-router-dom";
@@ -19,9 +19,9 @@ function HomePageNavbar() {
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = () => {
-        if (searchTerm.trim()) {
+        if (searchTerm.trim()) {    //  .trim It meanes remove extra spaces (start to end)
         Navigator(`/allproductsui?search=${encodeURIComponent(searchTerm.trim())}`);
-        }
+        }                               // encodeURIComponent() is used to convert safely URl like ( @, $, #)
     };
 
     // Toggle menu open/close

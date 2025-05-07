@@ -28,19 +28,20 @@ exports.placeOrder = async (req, res) => {
       receipt: `receipt_order_${Math.floor(Math.random() * 100000)}`,
     });
 
-    const paymentMethod = payment.method || "COD"; // Default to "COD" if no method provided
+    const paymentMethod = payment.method || "COD";
 
     // Create new order in the database
     const newOrder = new OrderModelSchema({
       userId,
-      cartId,  // Make sure this is a string (not an array)
+      cartId,
       cartItems,
       totalAmount,
       razorpayOrderId: razorpayOrder.id,
       address,
-      payment: {
-        method: paymentMethod,
-      },
+      payment: { method: paymentMethod },
+      tracking: [
+        { status: "Order Placed", timestamp: new Date() }
+      ]
     });
 
     await newOrder.save();
@@ -53,6 +54,7 @@ exports.placeOrder = async (req, res) => {
       amount: totalAmount,
       orderData: newOrder,
     });
+    
   } catch (error) {
     console.error("Error placing order:", error);
     res.status(501).json({

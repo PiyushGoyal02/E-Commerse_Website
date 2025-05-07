@@ -12,6 +12,10 @@ function AllProductsUI() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  // location.search → gives the query part of the URL (like ?search=Laptop Bags)
+  // URLSearchParams(...) → creates an object that can understand and work with that query
+  // .get("search") → extracts the value of "search", which is "Laptop Bags"
+  /* ?.toLowerCase() → converts that value to lowercase, making it "laptop bags" */
   const searchQuery = new URLSearchParams(location.search).get("search")?.toLowerCase();
 
   useEffect(() => {
