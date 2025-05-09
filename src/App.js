@@ -9,6 +9,7 @@ import AboutUs from './Components/AboutUs';
 import ProfileDetails from './Components/ProfileDetails';
 import CartSection from './Components/CartSection';
 import SingleProductUI from './Components/SingleProductUI';
+import OrderDetailsUserSide from './Components/OrderDetailUserSide';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/profiledetails' element={<ProfileDetails/>}></Route>
         <Route path="/cartsection" element={<CartSection/>}></Route>
         <Route path='/singleproductsui' element={<SingleProductUI/>}></Route>
+        <Route path='/orderdetailsuserside' element={<OrderDetailsUserSide/>}></Route>
 
 
         {/* Admin Section Routes */}

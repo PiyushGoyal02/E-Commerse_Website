@@ -10,7 +10,7 @@ function AdminOrderDetails() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/getAllorderData/getAllorderData");
+        const response = await axios.get(`http://localhost:4000/api/v1/getAllorderData/getAllorderData`);
 
         const OrderData = response.data.data;
         const formattedOrders = OrderData.map(order => ({
