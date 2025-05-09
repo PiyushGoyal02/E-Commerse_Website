@@ -12,11 +12,10 @@ function HomePageNavbar() {
 
     const Navigator = useNavigate();
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);  // When we click on profile icon, then open the dropdown
     const dropdownRef = useRef(null);  // Connect with HTML elememt
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    const [searchTerm, setSearchTerm] = useState("");
+    const [menuOpen, setMenuOpen] = useState(false);  // State to manage the side menu open/close
+    const [searchTerm, setSearchTerm] = useState("");  // State to manage the search term
 
     const handleSearch = () => {
         if (searchTerm.trim()) {    //  .trim It meanes remove extra spaces (start to end)
