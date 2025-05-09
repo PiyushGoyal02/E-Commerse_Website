@@ -5,12 +5,12 @@ import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
 import { useEffect, useState } from "react";
 
 function OrderDetailsUserSide() {
-  const [orderDetails, setOrderDetails] = useState([]);
+  const [orderDetails, setOrderDetails] = useState([]);   // Save All Order Details
+  const LoginUserId = localStorage.getItem("userLoginUserId");   // UserId get from localStorage After user login
+  const SignupUserId = localStorage.getItem("userSignupUserid"); // UserId get from localStorage After user Signup
+  const OrderDetailsUserId = LoginUserId || SignupUserId;   // get one UserId Login And Signup
 
-  const LoginUserId = localStorage.getItem("userLoginUserId");
-  const SignupUserId = localStorage.getItem("userSignupUserid");
-  const OrderDetailsUserId = LoginUserId || SignupUserId;
-
+    // Function to fetch all order details
   const getAllOrderDetails = async () => {
     try {
       const response = await axios.get(
@@ -31,6 +31,7 @@ function OrderDetailsUserSide() {
     }
   };
 
+    // Function to fetch all order details
   useEffect(() => {
     getAllOrderDetails();
   }, []);
