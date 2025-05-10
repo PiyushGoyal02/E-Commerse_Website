@@ -1,6 +1,6 @@
 require("dotenv").config();
 const Razorpay = require("razorpay");
-const OrderModelSchema = require("../Model/ProductOrderModel");
+const OrderModel = require("../Model/ProductOrderModel");
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -11,55 +11,63 @@ exports.placeOrder = async (req, res) => {
   try {
     const { userId, cartId, cartItems, totalAmount, address, payment } = req.body;
 
-    // Validation
-    if (!userId || !cartId || !cartItems || !totalAmount || !address) {
+    // Basic validation
+    if (!userId || !cartId || !Array.isArray(cartItems) || cartItems.length === 0 || !totalAmount || !address) {
       return res.status(400).json({
         success: false,
-        message: "Missing required fields.",
+        message: "Missing or invalid required fields.",
       });
     }
 
-    const amountInPaise = Math.round(totalAmount * 100);  // Convert to paise and round
+    const amountInPaise = Math.round(totalAmount * 100); // Convert to paise
 
-    // Create Razorpay order
-    const razorpayOrder = await razorpay.orders.create({
-      amount: amountInPaise,
-      currency: "INR",
-      receipt: `receipt_order_${Math.floor(Math.random() * 100000)}`,
-    });
+    // Create Razorpay order only if method is not COD
+    let razorpayOrder = null;
+    const paymentMethod = payment?.method || "COD";
 
-    const paymentMethod = payment.method || "COD";
+    if (paymentMethod !== "COD") {
+      razorpayOrder = await razorpay.orders.create({
+        amount: amountInPaise,
+        currency: "INR",
+        receipt: `receipt_order_${Math.floor(Math.random() * 1000000)}`,
+      });
+    }
 
-    // Create new order in the database
-    const newOrder = new OrderModelSchema({
+    // Save order
+    const newOrder = new OrderModel({
       userId,
       cartId,
       cartItems,
       totalAmount,
-      razorpayOrderId: razorpayOrder.id,
       address,
-      payment: { method: paymentMethod },
+      razorpayOrderId: razorpayOrder?.id || null,
+      status: "Pending", 
+      payment: {
+        method: paymentMethod,
+      },
       tracking: [
-        { status: "Order Placed", timestamp: new Date() }
-      ]
+        {
+          status: "Pending",
+        },
+      ],
     });
 
     await newOrder.save();
 
     res.status(201).json({
       success: true,
-      message: "Your Order Successfully Placed",
-      razorpayOrderId: razorpayOrder.id,
+      message: "Order placed successfully.",
       orderId: newOrder._id,
+      razorpayOrderId: razorpayOrder?.id || null,
       amount: totalAmount,
       orderData: newOrder,
     });
-    
+
   } catch (error) {
     console.error("Error placing order:", error);
-    res.status(501).json({
+    res.status(500).json({
       success: false,
-      message: "Your order has not been placed.",
+      message: "Failed to place order. Please try again.",
     });
   }
 };

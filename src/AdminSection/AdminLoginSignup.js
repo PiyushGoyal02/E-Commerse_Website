@@ -7,6 +7,7 @@ import AdminNavbar from "../Navbar-Sections/AdminNavbar";
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 
 function AdminLoginSigup() {
+
   const navigate = useNavigate();
 
   // For Right Panel Signup New Account
@@ -38,7 +39,7 @@ function AdminLoginSigup() {
     }));
   };
 
-  // Section Sign Up
+  // Sign up Section
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -57,7 +58,7 @@ function AdminLoginSigup() {
     }
   };
 
-  // Section Login
+  // Login Section
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -125,6 +126,7 @@ function AdminLoginSigup() {
 
             {/* Account Type Dropdown */}
             <select
+              required
               name="accountType"
               value={SignUp.accountType}
               onChange={ValueChange}
