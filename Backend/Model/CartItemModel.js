@@ -1,3 +1,5 @@
+// When we select proucts and create a cart, we need to store the cart items in the database.
+
 const mongoose = require("mongoose");
 
 const cartItemSchema = new mongoose.Schema({

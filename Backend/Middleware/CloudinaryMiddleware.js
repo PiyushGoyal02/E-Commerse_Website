@@ -5,8 +5,8 @@ const cloudinary = require("../Config/CloudinaryConfig");
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "ecommerce_products",
-    allowed_formats: ["jpg", "png", "jpeg", "webp", "avif"],
+    folder: "ecommerce_products",    // This is Folder Name in cloudinary
+    allowed_formats: ["jpg", "png", "jpeg", "webp", "avif"],    // Which type of image path should we use when uploading images?
   },
 });
 

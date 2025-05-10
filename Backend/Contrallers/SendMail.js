@@ -3,8 +3,10 @@ const Mailer = require("../Mail/SendMailer")
 exports.sendMail = async (req, res) => {
     try{
 
-        const { email } = req.body;
+        const { email } = req.body;  // Get Email from frontend from Signup page
+        console.log(email, "Email is here");
 
+        // Validation check if email is not getting
         if(!email){
             res.status(401).json(
                 {

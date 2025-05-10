@@ -42,10 +42,11 @@ const UserLoginSignup = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      const email = res.data.user.email
+      const SignupEmail = res.data.user.email
+      console.log(SignupEmail, "email")
       const userSignupUserid = res.data.user._id;
       
-      console.log(userSignupUserid)
+      // console.log(userSignupUserid)
       localStorage.setItem("userSignupUserid", userSignupUserid);
       toast.success("Signup successful!");
       navigate("/homepage");
@@ -53,10 +54,10 @@ const UserLoginSignup = () => {
 
       // This API for Email sendar
       try{
-        const emailResponse = await axios.post(`http://localhost:4000/api/v1/mailSend/sendMail`, email, {
+        const emailResponse = await axios.post(`http://localhost:4000/api/v1/mailSend/sendMail`, {email: SignupEmail}, {
           headers: { "Content-Type": "application/json" },
         })
-
+        console.log(emailResponse, "emailResponse")
         // console.log(emailResponse)
         toast.success("Email sent successful")
 
@@ -80,7 +81,7 @@ const UserLoginSignup = () => {
       const userLoginUserId = res.data.user._id;
       localStorage.setItem("userLoginUserId", userLoginUserId);
       const UserLoginAddress = res.data.user.address
-      console.log(UserLoginAddress)
+      // console.log(UserLoginAddress)
       localStorage.setItem("AfterLoginUserAddress", UserLoginAddress)
 
       toast.success("Login successful!");

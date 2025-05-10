@@ -1,3 +1,5 @@
+// When Admin adds products, we need to store the products in the database.
+
 const mongoose = require("mongoose");
 
 const addProducts = new mongoose.Schema (

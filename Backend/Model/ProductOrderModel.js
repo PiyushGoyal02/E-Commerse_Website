@@ -1,3 +1,5 @@
+// When order placed, the order details are stored in the database.
+
 const mongoose = require("mongoose");
 
 // Tracking schema

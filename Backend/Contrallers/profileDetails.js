@@ -42,7 +42,7 @@ exports.profileDetails = async (req, res) => {
         surname,
         email,
       },
-      { new: true }
+      { new: true }   // Set to true to return the updated document
     );
 
     // Validation Check
@@ -53,6 +53,7 @@ exports.profileDetails = async (req, res) => {
       });
     }
 
+    // Successfully User profile data Created
     res.status(200).json({
       success: true,
       message: "Profile updated successfully!",

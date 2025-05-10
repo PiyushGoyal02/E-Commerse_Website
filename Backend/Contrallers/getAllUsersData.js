@@ -3,8 +3,10 @@ const ModelSchema = require("../Model/LoginSignupModel")
 exports.allUsersDetails = async (req, res) => {
     try{
 
+        // get all user Data If accountType is user
         const userData = await ModelSchema.find({accountType: 'user'}).select('name surname email address pincode country number')
 
+        // Validation check
         if(!userData){
             res.status(401).json(
                 {

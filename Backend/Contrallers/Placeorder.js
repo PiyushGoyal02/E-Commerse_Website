@@ -2,6 +2,8 @@ require("dotenv").config();
 const Razorpay = require("razorpay");
 const OrderModel = require("../Model/ProductOrderModel");
 
+
+// get RazorPay key form .env file
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -19,7 +21,7 @@ exports.placeOrder = async (req, res) => {
       });
     }
 
-    const amountInPaise = Math.round(totalAmount * 100); // Convert to paise
+    const amountInPaise = Math.round(totalAmount * 100); // Convert to paise for Razorpay
 
     // Create Razorpay order only if method is not COD
     let razorpayOrder = null;
@@ -29,7 +31,7 @@ exports.placeOrder = async (req, res) => {
       razorpayOrder = await razorpay.orders.create({
         amount: amountInPaise,
         currency: "INR",
-        receipt: `receipt_order_${Math.floor(Math.random() * 1000000)}`,
+        receipt: `receipt_order_${Math.floor(Math.random() * 1000000)}`,   // Create Random receipt number
       });
     }
 
@@ -54,6 +56,7 @@ exports.placeOrder = async (req, res) => {
 
     await newOrder.save();
 
+    // Successfully Order Placed
     res.status(201).json({
       success: true,
       message: "Order placed successfully.",

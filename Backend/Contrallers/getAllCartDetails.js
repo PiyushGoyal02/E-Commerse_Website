@@ -16,7 +16,7 @@ exports.getCartItemData = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Cart data retrieved successfully.",
-      data: cartData, // ✅ Send the data too
+      data: cartData, // Send the data too
     });
 
   } catch (error) {

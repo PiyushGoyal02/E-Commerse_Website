@@ -2,6 +2,8 @@ const addproductsModel = require("../../Model/AdminAddProducts");
 
 exports.addProducts = async (req, res) => {
   try {
+
+    // Get data form Frontend 
     const {
       productName,
       descriptionText,
@@ -28,6 +30,7 @@ exports.addProducts = async (req, res) => {
     // Cloudinary returns full public URL in req.file.path
     const imageUrl = req.file.path;
 
+    // Add/Create product Details In Backend
     const newProduct = new addproductsModel({
       productName,
       descriptionText,

@@ -2,7 +2,7 @@ const cartItemModel = require("../Model/CartItemModel");
 
 exports.cartItem = async (req, res) => {
   try {
-    const { userId, products, totalAmount } = req.body;
+    const { userId, products, totalAmount } = req.body;   // Get Cart Data from frontend
 
     if (!userId || !products || !totalAmount || !Array.isArray(products) || products.length === 0) {
       return res.status(400).json({
