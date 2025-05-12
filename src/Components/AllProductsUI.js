@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 function AllProductsUI() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([]);   // This useState will hold all products fetched from the API
+  const [filteredProducts, setFilteredProducts] = useState([]);  // This useState will hold the products that match the search query
 
   // location.search → gives the query part of the URL (like ?search=Laptop Bags)
   // URLSearchParams(...) → creates an object that can understand and work with that query
@@ -18,6 +18,7 @@ function AllProductsUI() {
   /* ?.toLowerCase() → converts that value to lowercase, making it "laptop bags" */
   const searchQuery = new URLSearchParams(location.search).get("search")?.toLowerCase();
 
+  // 
   useEffect(() => {
     const fetchProducts = async () => {
       try {

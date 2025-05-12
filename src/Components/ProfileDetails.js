@@ -6,6 +6,7 @@ import axios from "axios";
 
 function ProfileDetails() {
 
+  // Get All User Details and save in this useState
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -20,6 +21,7 @@ function ProfileDetails() {
     type: "Home"
   });
 
+  // Target each form value and save in useState
   function changeFormHandler(event) {
     const { name, value } = event.target;
     setFormData((prevValue) => ({
@@ -28,18 +30,21 @@ function ProfileDetails() {
     }));
   }
 
+  // After Submit Funtion and with also API call.
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
 
+    // Get userId After User Login and Signup
     const userId = localStorage.getItem("userLoginUserId") || localStorage.getItem("userSignupUserid");
     console.log(userId)
 
+    // Check if userId is available
     if (!userId) {
       toast.error("User not logged in. Please login first.");
       return;
     }
 
+    // Combine form data with userId and pass it to the API
     const combinedData = {
       ...formData,
       userId,

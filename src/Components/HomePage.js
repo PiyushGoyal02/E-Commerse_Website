@@ -19,7 +19,7 @@ function HomePage() {
   // This Images for Categories UI
   const Images = [Vegetables, Fruits, Colddrink, Maggie, Bread, Milk, Pluces];
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);  // Save products data from API
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,17 +37,18 @@ function HomePage() {
     fetchProducts();
   }, []);
 
+  // Function to add product to cart
   const addToCartItem = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const isExist = cart.find(item => item._id === product._id);
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];  // Get cart from localStorage
+    const isExist = cart.find(item => item._id === product._id);  // Check if product already exists in cart
 
-    if (isExist) {
+    if (isExist) {       // If product exists, increase its quantity
       isExist.quantity += 1;
     } else {
       cart.push({ ...product, quantity: 1 });
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success(`${product.productName} added to cart!`);
+    localStorage.setItem("cart", JSON.stringify(cart));    // Update cart in localStorage
+    toast.success(`${product.productName} added to cart!`);  // Show success message
   }
 
   return (

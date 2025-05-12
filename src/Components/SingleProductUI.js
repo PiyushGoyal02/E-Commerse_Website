@@ -6,28 +6,31 @@ import toast from "react-hot-toast";
 
 function SingleProductUI () {
 
-    const location = useLocation()
+    const location = useLocation() 
     const product = location.state
-    const productData = product.product
+    const productData = product.product   // we get the product data from the location state
     console.log(productData)
 
+    // Products Add to Cart Function
     const addToCartItem = (product) => {
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const isExist = cart.find(item => item._id === product._id);
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];  // First We get the cart from localStorage
+        const isExist = cart.find(item => item._id === product._id);  // Check if the product already exists in the cart
 
-        if (isExist) {
+        if (isExist) {      // If any that product is available in the cart and we want to increase the quantity
             isExist.quantity = +1;
         } else {
             cart.push({ ...product, quantity: 1 });
         }
-        localStorage.setItem("cart", JSON.stringify(cart));
-        toast.success(`${product.productName} added to cart!`);
+        localStorage.setItem("cart", JSON.stringify(cart));   // Update the cart in localStorage
+        toast.success(`${product.productName} added to cart!`);  // Show success message
     }
 
     return (
         <div>
 
+            {/* It's a Navbar Code */}
             <HomePageNavbar/>
+
             {/* It's for only Website UI */}
             <div className="SingleProductUiForWebsite">
                 <div className="ProductContentDiv">
@@ -132,6 +135,7 @@ function SingleProductUI () {
                 </div>
             </div>
 
+            {/* It's a Footer Code */}
             <Footer/>
         </div>
     )

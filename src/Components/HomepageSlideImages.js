@@ -8,23 +8,25 @@ import "../Css-Code/HomepageSlideImagesCSS.css";
 function HomepageSlideImages() {
   const [selectImages, setSelectImages] = useState(0);
 
+  // This Images for Slider UI
   const Images = [
     HomepageSliderImage1,
     HomepageSliderImage2,
     HomepageSliderImage3
   ];
 
-    function rightside() {
-        let nextIndex = selectImages + 1;
-        if (nextIndex >= Images.length) {
-          nextIndex = 0;
-        }
-        setSelectImages(nextIndex);
-    }
+  // Function to go to the next image in the slider
+  function rightside() {
+      let nextIndex = selectImages + 1;
+      if (nextIndex >= Images.length) {   // If it's the last image, loop back to the first
+        nextIndex = 0;
+      }
+      setSelectImages(nextIndex);    // Update the index
+  }
 
-
+  // Function to go to the previous image in the slider
   const leftside = () => {
-    setSelectImages((prev) =>
+    setSelectImages((prev) =>      // If it's the first image, go to the last; otherwise, go to previous
       prev === 0 ? Images.length - 1 : prev - 1
     );
   };

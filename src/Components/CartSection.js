@@ -184,6 +184,7 @@ function CartSection() {
             </div>
           </div>
 
+          {/* Only For Mobile  Left Side UI Code*/}
           <div className="MobilePhoneUi">
             <div className="cart-items">
               {cartItems.map((item) => (
