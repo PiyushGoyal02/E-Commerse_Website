@@ -144,14 +144,55 @@ function CartSection() {
             <h4>Action</h4>
           </div>
 
-          <div className="cart-items">
-            {cartItems.map((item) => (
-              <div className="cart-item" key={item._id}>
-                <div className="item-left">
-                  <img src={item.productImages} alt={item.productName} />
-                  <div className="details">
-                    <h5>{item.productName}</h5>
-                    <p>Weight: N/A</p>
+          {/* Only For Website */}
+          <div className="WebsiteUi">
+            <div className="cart-items">
+              {cartItems.map((item) => (
+                <div className="cart-item" key={item._id}>
+                  <div className="item-left">
+                    <img src={item.productImages} alt={item.productName} />
+                    <div className="details">
+                      <h5>{item.productName}</h5>
+                      <p>Weight: N/A</p>
+                      <select
+                        className="qtySelect"
+                        value={item.quantity}
+                        onChange={(e) => {
+                          const updatedCart = cartItems.map((prod) =>
+                            prod._id === item._id
+                              ? { ...prod, quantity: parseInt(e.target.value) }
+                              : prod
+                          );
+                          localStorage.setItem("cart", JSON.stringify(updatedCart));
+                          setCartItems(updatedCart);
+                        }}
+                      >
+                        {[...Array(10).keys()].map((num) => (
+                          <option key={num} value={num + 1}>
+                            {num + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="subtotal">₹{item.productprice * item.quantity}</div>
+                  <div onClick={() => removeFromCart(item._id)}>
+                    <button className="removeIMG"><MdDeleteForever /></button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="MobilePhoneUi">
+            <div className="cart-items">
+              {cartItems.map((item) => (
+                <div className="cart-item" key={item._id}>
+                  <div className="item-left">
+                    <div className="productImageNameDiv">
+                      <img className="productImage" src={item.productImages} alt={item.productName} />
+                      <h5 className="ProductName">{item.productName}</h5>
+                    </div>
                     <select
                       className="qtySelect"
                       value={item.quantity}
@@ -172,13 +213,13 @@ function CartSection() {
                       ))}
                     </select>
                   </div>
+                  <div className="subtotal">₹{item.productprice * item.quantity}</div>
+                  <div onClick={() => removeFromCart(item._id)}>
+                    <button className="removeIMG"><MdDeleteForever /></button>
+                  </div>
                 </div>
-                <div className="subtotal">₹{item.productprice * item.quantity}</div>
-                <div onClick={() => removeFromCart(item._id)}>
-                  <button className="removeIMG"><MdDeleteForever /></button>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="ContinuesShoopingDiv">

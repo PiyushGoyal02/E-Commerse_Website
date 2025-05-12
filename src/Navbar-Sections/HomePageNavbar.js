@@ -121,6 +121,7 @@ function HomePageNavbar() {
                         <div className="textNavigatorDiv">
                             <p className="textNavigator" onClick={() => Navigator('/homepage')}>Home</p>
                             <p className="textNavigator" onClick={() => Navigator('/profiledetails')}>Profile</p>
+                            <p className="textNavigator" onClick={() => Navigator('/cartsection')}>Cart Section</p>
                             <p className="textNavigator" onClick={() => Navigator('/orderdetailsuserside')}>Order History</p>
                             <p className="textNavigator" onClick={() => Navigator('/allproductsui')}>All Product</p>
                             <p className="textNavigator" onClick={() => Navigator('/aboutUs')}>About Us</p>

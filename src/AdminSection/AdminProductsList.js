@@ -4,6 +4,7 @@ import "../AdminSectionCSS/AdminProductsListCSS.css";
 
 function AdminProductsList() {
 
+  // Store All products Data in this useState
   const [product, setProducts] = useState([]);
   
   useEffect(() => {
