@@ -70,7 +70,7 @@ function AdminOrderDetails() {
               </div>
             </div>
             <div className="order-center">
-              <p><strong>{order.customer}</strong></p>
+              <p className="CustmoreID"><strong>{order.customer}</strong></p>
               <p>{order.address}</p>
               <p>{order.phone}</p>
               

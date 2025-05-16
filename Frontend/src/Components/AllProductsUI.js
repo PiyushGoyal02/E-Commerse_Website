@@ -72,7 +72,7 @@ function AllProductsUI() {
     <div>
       <HomePageNavbar />
       <div className="veggie-section">
-        <h2>ALL PRODUCTS</h2>
+        <h2 className="AllproductsText">ALL PRODUCTS</h2>
         <div className="veggie-grid">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
