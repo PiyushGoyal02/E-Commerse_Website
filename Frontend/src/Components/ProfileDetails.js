@@ -3,8 +3,11 @@ import "../Css-Code/ProfileDetailsCSS.css";
 import toast from "react-hot-toast";
 import HomePageNavbar from "../Navbar-Sections/HomePageNavbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ProfileDetails() {
+
+  const Navigator = useNavigate();
 
   // Get All User Details and save in this useState
   const [formData, setFormData] = useState({
@@ -50,6 +53,8 @@ function ProfileDetails() {
       userId,
     };
 
+    console.log(combinedData, "Combined Data");
+
     try {
       const profileDetailsResponce = await axios.post(
         `http://localhost:4000/api/v1/profileDetails/profileDetails`,
@@ -62,6 +67,7 @@ function ProfileDetails() {
       const final = profileDetailsResponce.data;
       console.log(final);
       toast.success("Your Data Softly Updated!");
+      Navigator("/homepage");
     } catch (error) {
       console.log(error.message);
       toast.error("Your Profile Didn't Update");

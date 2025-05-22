@@ -42,6 +42,7 @@ const UserLoginSignup = () => {
         headers: { "Content-Type": "application/json" },
       });
 
+      console.log(res)
       const SignupEmail = res.data.user.email
       console.log(SignupEmail, "email")
       const userSignupUserid = res.data.user._id;
@@ -49,7 +50,7 @@ const UserLoginSignup = () => {
       // console.log(userSignupUserid)
       localStorage.setItem("userSignupUserid", userSignupUserid);
       toast.success("Signup successful!");
-      navigate("/homepage");
+      navigate("/profiledetails");
       setLoading(false)
 
       // This API for Email sendar
